@@ -36,3 +36,18 @@ variable "public_subnet_count" {
 variable "private_subnet_count" {
   description = "Número de subnets privadas"
 }
+
+#--------------------------------------------------------------------------------
+variable "os_type" {
+  description = "Tipo de sistema operativo (linux, ubuntu, windows)"
+  type        = string
+}
+
+variable "instance_type" {
+  description = "Tipo de instancia"
+  type        = string
+}
+variable "subnet_type" {
+  description = "Tipo de subred a utilizar (public o private)"
+  type        = string
+}
