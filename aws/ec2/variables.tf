@@ -51,3 +51,7 @@ locals {
   # Lógica para seleccionar la lista de subredes según el tipo
   selected_subnet_ids = var.subnet_type == "public" ? var.public_subnet_ids : var.private_subnet_ids
 }
+variable "position_red" {
+  description = "Tipo de subred a utilizar (public o private)"
+  type        = number
+}

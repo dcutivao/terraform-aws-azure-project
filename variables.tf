@@ -51,3 +51,7 @@ variable "subnet_type" {
   description = "Tipo de subred a utilizar (public o private)"
   type        = string
 }
+variable "position_red" {
+  description = "Tipo de subred a utilizar (public o private)"
+  type        = number
+}

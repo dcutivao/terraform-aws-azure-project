@@ -17,16 +17,16 @@ module "vpc" {
   public_subnet_count  = var.public_subnet_count
   private_subnet_count = var.private_subnet_count
 }
-
 module "ec2" {
-  source               = "./aws/ec2"
-  aws_region = var.aws_region
-  os_type = var.os_type
+  source             = "./aws/ec2"
+  aws_region         = var.aws_region
+  os_type            = var.os_type
   public_subnet_ids  = module.vpc.public_subnets
   private_subnet_ids = module.vpc.private_subnets
-  environment = var.environment
-  instance_type = var.instance_type
-  subnet_type = var.subnet_type
+  environment        = var.environment
+  instance_type      = var.instance_type
+  subnet_type        = var.subnet_type
+  position_red       = var.position_red
 }
 
 /* module "aws_infra" {
