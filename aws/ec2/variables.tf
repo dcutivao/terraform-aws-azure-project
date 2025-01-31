@@ -55,3 +55,11 @@ variable "position_red" {
   description = "Tipo de subred a utilizar (public o private)"
   type        = number
 }
+
+variable "vpc_id" {
+  type = string
+}
+variable "security_group_ids" {
+  description = "Lista de IDs de Security Groups a asociar con la instancia EC2"
+  type        = list(string)
+}

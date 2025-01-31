@@ -17,6 +17,34 @@ module "vpc" {
   public_subnet_count  = var.public_subnet_count
   private_subnet_count = var.private_subnet_count
 }
+
+module "security_groups" {
+  source = "./aws/security_groups"
+  vpc_id = module.vpc.vpc_id
+  security_groups = [
+    {
+      name         = "ec2-sg"
+      description  = "Security Group para EC2"
+      ingress_rules = [
+        { from_port = 22, to_port = 22, protocol = "tcp", cidr_blocks = ["0.0.0.0/0"] },
+        { from_port = 80, to_port = 80, protocol = "tcp", cidr_blocks = ["0.0.0.0/0"] }
+      ]
+      egress_rules = [
+        { from_port = 0, to_port = 0, protocol = "-1", cidr_blocks = ["0.0.0.0/0"] }
+      ]
+    },
+    {
+      name         = "rds-sg"
+      description  = "Security Group para RDS"
+      ingress_rules = [
+        { from_port = 5432, to_port = 5432, protocol = "tcp", cidr_blocks = ["10.0.0.0/16"] }
+      ]
+      egress_rules = [
+        { from_port = 0, to_port = 0, protocol = "-1", cidr_blocks = ["0.0.0.0/0"] }
+      ]
+    }
+  ]
+}
 module "ec2" {
   source             = "./aws/ec2"
   aws_region         = var.aws_region
@@ -27,6 +55,8 @@ module "ec2" {
   instance_type      = var.instance_type
   subnet_type        = var.subnet_type
   position_red       = var.position_red
+  security_group_ids = [module.security_groups.security_group_ids.ec2-sg]
+  vpc_id             = module.vpc.vpc_id
 }
 
 /* module "aws_infra" {

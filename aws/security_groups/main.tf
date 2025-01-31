@@ -1,23 +1,28 @@
-resource "aws_security_group" "sg_server_web" {
-  name   = "server_web-sg_1"
-  vpc_id = module.vpc_id
 
+# modules/security_group/main.tf
+resource "aws_security_group" "sg" {
+  for_each    = { for sg in var.security_groups : sg.name => sg }
+  name        = each.value.name
+  description = each.value.description
+  vpc_id      = var.vpc_id
+
+  # 🔹 Reglas de entrada (ingress)
   dynamic "ingress" {
-    for_each = var.web_ingress
+    for_each = each.value.ingress_rules
     content {
-      description = ingress.value.description
-      from_port   = ingress.value.port
-      to_port     = ingress.value.port
+      from_port   = ingress.value.from_port
+      to_port     = ingress.value.to_port
       protocol    = ingress.value.protocol
       cidr_blocks = ingress.value.cidr_blocks
     }
   }
+
+  # 🔹 Reglas de salida (egress)
   dynamic "egress" {
-    for_each = var.web_egress
+    for_each = each.value.egress_rules
     content {
-      description = egress.value.description
-      from_port   = egress.value.port
-      to_port     = egress.value.port
+      from_port   = egress.value.from_port
+      to_port     = egress.value.to_port
       protocol    = egress.value.protocol
       cidr_blocks = egress.value.cidr_blocks
     }

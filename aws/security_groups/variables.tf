@@ -1,45 +1,25 @@
-# Constrccion de Bloques Dynamicos de SG
-variable "web_ingress" {
-  type = map(object(
-    {
-      description = string
-      port        = number
-      protocol    = string
-      cidr_blocks = list(string)
-    }
-  ))
-  default = {
-    "80" = {
-      description = "Port 80"
-      port        = 80
-      protocol    = "tcp"
-      cidr_blocks = ["0.0.0.0/0"]
-    }
-    "22" = {
-      description = "Port 22"
-      port        = 22
-      protocol    = "tcp"
-      cidr_blocks = ["0.0.0.0/0"]
-    }
-  }
+variable "vpc_id" {
+  description = "ID de la VPC donde se creará el Security Group"
+  type        = string
 }
 
-variable "web_egress" {
-  type = map(object(
-    {
-      description = string
-      port        = number
+# modules/security_group/variables.tf
+variable "security_groups" {
+  description = "Lista de Security Groups con sus reglas"
+  type = list(object({
+    name         = string
+    description  = string
+    ingress_rules = list(object({
+      from_port   = number
+      to_port     = number
       protocol    = string
       cidr_blocks = list(string)
-    }
-  ))
-  default = {
-    "0" = {
-      description = "Port 0"
-      from_port   = 0
-      port        = 0
-      protocol    = "-1"
-      cidr_blocks = ["0.0.0.0/0"]
-    }
-  }
+    }))
+    egress_rules = list(object({
+      from_port   = number
+      to_port     = number
+      protocol    = string
+      cidr_blocks = list(string)
+    }))
+  }))
 }
