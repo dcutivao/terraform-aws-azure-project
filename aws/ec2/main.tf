@@ -1,10 +1,12 @@
-resource "aws_instance" "server_web" {
-  ami           = lookup(lookup(var.ami_map, var.aws_region, {}), var.os_type, "")
-  instance_type = var.instance_type
-  subnet_id     = local.selected_subnet_ids[var.position_red]
-  #vpc_security_group_ids = var.se
+resource "aws_instance" "ec2" {
+  for_each      = var.instances
+  ami           = var.amis[var.aws_region][each.value.os]
+  instance_type = each.value.instance_type
+  subnet_id     = each.value.subnet_id
+  vpc_security_group_ids = each.value.security_groups
+
   tags = {
-    Name = "Server-${var.environment}"
-    Terraform = "true"
+    environment = var.environment
+    Terraform   = "true"
   }
 }
