@@ -37,7 +37,7 @@ module "security_groups" {
       name        = "rds-sg"
       description = "Security Group para RDS"
       ingress_rules = [
-        { from_port = 5432, to_port = 5432, protocol = "tcp", cidr_blocks = ["10.0.0.0/16"] }
+        { from_port = 3306, to_port = 3306, protocol = "tcp", cidr_blocks = ["172.16.3.0/24"] }
       ]
       egress_rules = [
         { from_port = 0, to_port = 0, protocol = "-1", cidr_blocks = ["0.0.0.0/0"] }
@@ -56,18 +56,37 @@ module "ec2" {
     "web-server" = {
       instance_type = "t2.micro"
       # Red a la que pertenecera public o private y la posicion según el indexado de la lista en el archivo terraform.tfvars
-      subnet_id       = module.vpc.public_subnets[0]
+      subnet_id       = module.vpc.public_subnets[1]
       os              = "ubuntu"
-      security_groups = [module.security_groups.security_group_ids["ec2-sg"], module.security_groups.security_group_ids["rds-sg"]]
+      security_groups = [module.security_groups.security_group_ids["ec2-sg"]]
     }
     "db-server" = {
       instance_type   = "t2.medium"
-      subnet_id       = module.vpc.private_subnets[1] # esto es la salida del ouput de la variable private_subnets del modulo ec2
+      subnet_id       = module.vpc.private_subnets[0] # esto es la salida del ouput de la variable private_subnets del modulo ec2
       os              = "amazon"
-      security_groups = [module.security_groups.security_group_ids["rds-sg"]]
+      security_groups = [module.security_groups.security_group_ids["rds-sg"], module.security_groups.security_group_ids["ec2-sg"]]
     }
   }
 }
+
+module "rds" {
+  source             = "./aws/rds"
+  db_identifier      = "db-${var.environment}"
+  db_name            = "mydb"
+  db_username        = "admin"
+  db_password        = "Pueden_Copiar_el_SecretPassword123"
+  db_instance_class  = "db.t4g.micro"
+  allocated_storage  = 20
+  engine             = "mysql"
+  engine_version     = "8.0"
+  subnet_ids         = [module.vpc.private_subnets[1]]
+  security_group_ids = [module.security_groups.security_group_ids["rds-sg"]]
+  environment        = var.environment
+}
+
+/* subnet_ids       = module.vpc.private_subnet_ids
+  security_group_ids = [module.security_group.rds_sg_id] */
+
 
 
 /* module "s3_bucket" {

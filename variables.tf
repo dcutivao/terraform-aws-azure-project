@@ -42,7 +42,6 @@ variable "private_subnet_count" {
 variable "amis" {
   description = "Mapa de AMIs por región y sistema operativo"
   type        = map(map(string))
-
   default = {
     "us-east-1" = {
       "ubuntu"  = "ami-04b4f1a9cf54c11d0"
