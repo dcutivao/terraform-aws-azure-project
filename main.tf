@@ -46,6 +46,34 @@ module "security_groups" {
   ]
 }
 
+module "iam" {
+  source = "./aws/iam"
+
+  iam_roles = {
+    "EC2Role" = {
+      service                 = "ec2.amazonaws.com"
+      policy_file             = "ec2_policy.json"
+      effect                  = "Allow"
+      action                  = ["s3:ListBucket", "s3:GetObject"]
+      resource                = ["arn:aws:s3:::${var.bucket_name}-${var.environment}","arn:aws:s3:::${var.bucket_name}-${var.environment}/*"]
+      create_instance_profile = true
+    }
+    /* "LambdaRole" = {
+      service               = "lambda.amazonaws.com"
+      policy_file           = "lambda_policy.json"
+      effect                = "Allow"
+      Action                = ["dynamodb:PutItem", "dynamodb:GetItem"]
+      "Resource"            = ["*"]
+    } */
+/*  
+# Dejo como ejemplo para futuros cambios anexar politicas de acceso a los roles como lambda y S3
+    "S3Role" = {
+      service               = "s3.amazonaws.com"
+      policy_file           = "s3_policy.json"
+    } */
+  }
+}
+
 module "ec2" {
   source = "./aws/ec2"
 
@@ -66,6 +94,7 @@ module "ec2" {
       subnet_id       = module.vpc.private_subnets[0] # esto es la salida del ouput de la variable private_subnets del modulo ec2
       os              = "amazon"
       security_groups = [module.security_groups.security_group_ids["rds-sg"], module.security_groups.security_group_ids["ec2-sg"]]
+      iam_instance_profile = module.iam.iam_instance_profiles["EC2Role"]
     }
   }
 }
@@ -90,31 +119,6 @@ module "s3_bucket" {
   bucket_name       = var.bucket_name
   status_versioning = "Disabled"        # habilitar use Enabled
   environment       = var.environment
-}
-
-module "iam" {
-  source = "./aws/iam"
-
-  iam_roles = {
-    "EC2Role" = {
-      service                 = "ec2.amazonaws.com"
-      policy_file             = "ec2_policy.json"
-      effect                  = "Allow"              # Allow o Deny
-      action                  = ["s3:ListBucket", "s3:GetObject"]
-      resource                = ["arn:aws:s3:::${var.bucket_name}-${var.environment}","arn:aws:s3:::${var.bucket_name}-${var.environment}/*"]
-      create_instance_profile = true
-    }
-    /* "LambdaRole" = {
-      service               = "lambda.amazonaws.com"
-      policy_file           = "lambda_policy.json"
-    } */
-/*  
-# Dejo como ejemplo para futuros cambios anexar politicas de acceso a los roles como lambda y S3
-    "S3Role" = {
-      service               = "s3.amazonaws.com"
-      policy_file           = "s3_policy.json"
-    } */
-  }
 }
 
 

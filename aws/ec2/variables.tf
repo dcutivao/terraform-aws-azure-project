@@ -1,10 +1,11 @@
 variable "instances" {
   description = "Lista de instancias a crear"
   type = map(object({
-    instance_type   = string
-    subnet_id       = string
-    os              = string
-    security_groups = list(string)
+    instance_type        = string
+    subnet_id            = string
+    os                   = string
+    security_groups      = list(string)
+    iam_instance_profile = string
   }))
 }
 

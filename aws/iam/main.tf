@@ -6,7 +6,7 @@ resource "aws_iam_role" "roles" {
   assume_role_policy = jsonencode({
     Version = "2012-10-17"
     Statement = [{
-      Effect = "Allow"
+      Effect = each.value.effect
       Principal = {
         Service = each.value["service"]
       }
@@ -30,23 +30,6 @@ resource "aws_iam_policy" "policies" {
     ]
   })
 }
-
-
-
-
-/* policy = file("${path.module}/${each.value["policy_file"]}")
-{
-    "Version": "2012-10-17",
-    "Statement": [
-      {
-        "Effect": "Allow",
-        "Action": ["dynamodb:PutItem", "dynamodb:GetItem"],
-        "Resource": "*"
-      }
-    ]
-  } */ 
-
-
 resource "aws_iam_role_policy_attachment" "attachments" {
   for_each = var.iam_roles
 
