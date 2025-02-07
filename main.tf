@@ -56,9 +56,10 @@ module "ec2" {
     "web-server" = {
       instance_type = "t2.micro"
       # Red a la que pertenecera public o private y la posicion según el indexado de la lista en el archivo terraform.tfvars
-      subnet_id       = module.vpc.public_subnets[1]
-      os              = "ubuntu"
-      security_groups = [module.security_groups.security_group_ids["ec2-sg"]]
+      subnet_id            = module.vpc.public_subnets[1]
+      os                   = "ubuntu"
+      security_groups      = [module.security_groups.security_group_ids["ec2-sg"]]
+      iam_instance_profile = module.iam.iam_instance_profiles["EC2Role"]
     }
     "db-server" = {
       instance_type   = "t2.medium"
@@ -72,9 +73,9 @@ module "ec2" {
 module "rds" {
   source             = "./aws/rds"
   db_identifier      = "db-${var.environment}"
-  db_name            = "mydb"
+  db_name            = "mydb-${var.environment}"
   db_username        = "admin"
-  db_password        = "Pueden_Copiar_el_SecretPassword123"
+  db_password        = "Pueden_Copiar_el_Password123"
   db_instance_class  = "db.t4g.micro"
   allocated_storage  = 20
   engine             = "mysql"
@@ -84,18 +85,36 @@ module "rds" {
   environment        = var.environment
 }
 
-/* subnet_ids       = module.vpc.private_subnet_ids
-  security_group_ids = [module.security_group.rds_sg_id] */
+module "s3_bucket" {
+  source            = "./aws/s3"
+  bucket_name       = var.bucket_name
+  status_versioning = "Disabled"        # habilitar use Enabled
+  environment       = var.environment
+}
 
+module "iam" {
+  source = "./aws/iam"
 
-
-/* module "s3_bucket" {
-  source        = "./aws/s3"
-  bucket_name   = "prueba-123-my-example-bucket"
-  acl           = "private"
-  force_destroy = true
-  tags = {
-    Environment = "Dev"
-    Project     = "Terraform AWS-Azure"
+  iam_roles = {
+    "EC2Role" = {
+      service                 = "ec2.amazonaws.com"
+      policy_file             = "ec2_policy.json"
+      effect                  = "Allow"              # Allow o Deny
+      action                  = ["s3:ListBucket", "s3:GetObject"]
+      resource                = ["arn:aws:s3:::${var.bucket_name}-${var.environment}","arn:aws:s3:::${var.bucket_name}-${var.environment}/*"]
+      create_instance_profile = true
+    }
+    /* "LambdaRole" = {
+      service               = "lambda.amazonaws.com"
+      policy_file           = "lambda_policy.json"
+    } */
+/*  
+# Dejo como ejemplo para futuros cambios anexar politicas de acceso a los roles como lambda y S3
+    "S3Role" = {
+      service               = "s3.amazonaws.com"
+      policy_file           = "s3_policy.json"
+    } */
   }
-} */
+}
+
+
