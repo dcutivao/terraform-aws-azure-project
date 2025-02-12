@@ -6,6 +6,7 @@ variable "instances" {
     os                   = string
     security_groups      = list(string)
     iam_instance_profile = string
+    key_name             = string
   }))
 }
 

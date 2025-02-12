@@ -24,8 +24,8 @@ resource "aws_iam_policy" "policies" {
     "Statement": [
       {
         "Effect": each.value.effect,
-        "Action": [for action in var.iam_roles: action],
-        "Resource": [for resource in var.iam_roles: resource]
+        "Action": each.value.action,
+        "Resource": each.value.resource
       }
     ]
   })

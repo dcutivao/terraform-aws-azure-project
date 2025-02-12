@@ -45,7 +45,6 @@ module "security_groups" {
     }
   ]
 }
-
 module "iam" {
   source = "./aws/iam"
 
@@ -55,25 +54,36 @@ module "iam" {
       policy_file             = "ec2_policy.json"
       effect                  = "Allow"
       action                  = ["s3:ListBucket", "s3:GetObject"]
-      resource                = ["arn:aws:s3:::${var.bucket_name}-${var.environment}","arn:aws:s3:::${var.bucket_name}-${var.environment}/*"]
+      resource                = [module.s3_bucket.bucket_arn, "${module.s3_bucket.bucket_arn}/*"]
       create_instance_profile = true
     }
+    # Dejo como ejemplo para futuros cambios anexar politicas de acceso a los roles como lambda y S3
     /* "LambdaRole" = {
       service               = "lambda.amazonaws.com"
       policy_file           = "lambda_policy.json"
       effect                = "Allow"
       Action                = ["dynamodb:PutItem", "dynamodb:GetItem"]
       "Resource"            = ["*"]
-    } */
-/*  
-# Dejo como ejemplo para futuros cambios anexar politicas de acceso a los roles como lambda y S3
+    }  
     "S3Role" = {
       service               = "s3.amazonaws.com"
       policy_file           = "s3_policy.json"
-    } */
+    }*/
   }
 }
 
+resource "tls_private_key" "generated" {
+  algorithm = "RSA"
+}
+
+resource "aws_key_pair" "generated" {
+  key_name   = "AWS-Key-${var.environment}"
+  public_key = tls_private_key.generated.public_key_openssh
+}
+resource "local_file" "private_key_pem" {
+  content   = tls_private_key.generated.private_key_pem
+  filename  = "AWS-Key-${var.environment}.pem"                                                           # en este apartado podemos indicar la ruta donde queremos que repose nuestra key("/home/armando/Descargas/MyAWSKey.pem") o solo con el nombre queda local 
+}
 module "ec2" {
   source = "./aws/ec2"
 
@@ -88,37 +98,36 @@ module "ec2" {
       os                   = "ubuntu"
       security_groups      = [module.security_groups.security_group_ids["ec2-sg"]]
       iam_instance_profile = module.iam.iam_instance_profiles["EC2Role"]
+      key_name             = aws_key_pair.generated.key_name
     }
-    "db-server" = {
-      instance_type   = "t2.medium"
-      subnet_id       = module.vpc.private_subnets[0] # esto es la salida del ouput de la variable private_subnets del modulo ec2
-      os              = "amazon"
-      security_groups = [module.security_groups.security_group_ids["rds-sg"], module.security_groups.security_group_ids["ec2-sg"]]
+    /* "db-server" = {
+      instance_type        = "t2.micro"
+      subnet_id            = module.vpc.private_subnets[0] # esto es la salida del ouput de la variable private_subnets del modulo ec2
+      os                   = "amazon"
+      security_groups      = [module.security_groups.security_group_ids["rds-sg"], module.security_groups.security_group_ids["ec2-sg"]]
       iam_instance_profile = module.iam.iam_instance_profiles["EC2Role"]
-    }
+      key_name             = aws_key_pair.generated.key_name
+    } */
   }
 }
-
 module "rds" {
   source             = "./aws/rds"
   db_identifier      = "db-${var.environment}"
-  db_name            = "mydb-${var.environment}"
+  db_name            = "mydb${var.environment}"
   db_username        = "admin"
   db_password        = "Pueden_Copiar_el_Password123"
   db_instance_class  = "db.t4g.micro"
   allocated_storage  = 20
   engine             = "mysql"
   engine_version     = "8.0"
-  subnet_ids         = [module.vpc.private_subnets[1]]
+  subnet_ids         = [module.vpc.private_subnets[0], module.vpc.private_subnets[1]]
   security_group_ids = [module.security_groups.security_group_ids["rds-sg"]]
   environment        = var.environment
 }
-
 module "s3_bucket" {
   source            = "./aws/s3"
   bucket_name       = var.bucket_name
-  status_versioning = "Disabled"        # habilitar use Enabled
+  status_versioning = "Disabled" # habilitar use Enabled
   environment       = var.environment
 }
-
 

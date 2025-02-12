@@ -45,7 +45,7 @@ variable "amis" {
   default = {
     "us-east-1" = {
       "ubuntu"  = "ami-04b4f1a9cf54c11d0"
-      "amazon"  = "ami-0c614dee691cbbf3"
+      "amazon"  = "ami-085ad6ae776d8f09c"
       "windows" = "ami-04f77c9cd94746b09"
     }
     "us-west-2" = {
