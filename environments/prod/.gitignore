@@ -1,0 +1,24 @@
+# Ejemplo completo de un .gitignore para trabajr con Terraform:
+
+# Archivos de estado de Terraform
+*.tfstate
+*.tfstate.backup
+
+# Bloqueo de versiones de proveedores
+.terraform.lock.hcl
+
+# Directorio de plugins y temporales
+.terraform/
+
+# Archivos de credenciales y configuración local
+*.tfvars
+*.auto.tfvars
+
+# Archivos de logs o salida temporal
+crash.log
+*.log
+
+# Archivos específicos del sistema operativo
+.DS_Store
+Thumbs.db
+
