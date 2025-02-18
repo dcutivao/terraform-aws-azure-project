@@ -1,8 +1,8 @@
 #-----------------------------------Infraestrucutura AWS--------------------------------------------------------
-provider "aws" {
+/* provider "aws" {
   region = var.aws_region
 }
-/* module "vpc" {
+module "vpc" {
   source               = "../../modules/aws/vpc"
   vpc_cidr             = var.vpc_cidr
   environment          = var.environment
@@ -11,9 +11,9 @@ provider "aws" {
   availability_az      = var.availability_az
   public_subnet_count  = var.public_subnet_count
   private_subnet_count = var.private_subnet_count
-} */
+}
 
-/* module "security_groups" {
+module "security_groups" {
   source = "../../modules/aws/security_groups"
   vpc_id = module.vpc.vpc_id
   security_groups = [
@@ -133,14 +133,23 @@ resource "local_file" "private_key_pem" {
 #-----------------------------------Infraestrucutura Azure--------------------------------------------------------
 provider "azurerm" {
   features {}
-  subscription_id = "0d7ecae9-a77e-4be7-a4ed-a919546cb3ba"
+  resource_provider_registrations = "none" # el argumento "nome" =  Esto significa que Terraform no registrará automáticamente ningún proveedor de recursos en la suscripción de Azure.
+  subscription_id                 = var.id_suscripcion
 }
 
-resource "azurerm_resource_group" "region" {
-  name = "Grupo-de-recursos-Azure"
-  location = "East US"
-    tags = {
+resource "azurerm_resource_group" "rg" {
+  name     = "${var.name_resource_group}-${var.environment}"
+  location = var.location
+  tags = {
     environment = "entorno-${var.environment}"
     owner       = "Armando"
   }
+}
+
+resource "azurerm_storage_account" "storage_account" {
+  name                     = "storag0account0bucket0s3"
+  resource_group_name      = azurerm_resource_group.rg.name
+  location                 = azurerm_resource_group.rg.location
+  account_tier             = "Standard"
+  account_replication_type = "LRS"
 }

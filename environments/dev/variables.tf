@@ -62,3 +62,18 @@ variable "bucket_name" {
   description = "Nombre del bucket S3"
   type        = string
 }
+
+#------------------------------------Variables infra Azure---------------------------------------------------------
+variable "location" {
+  description = "Region desplegar recursos en Azure"
+  type        = string
+}
+variable "id_suscripcion" {
+  description = "id de la subcripcion de Azure"
+  type        = string
+}
+
+variable "name_resource_group" {
+  type        = string
+  description = "Nombre del grupo de recursos"
+}
