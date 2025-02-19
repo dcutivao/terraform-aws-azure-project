@@ -137,6 +137,7 @@ provider "azurerm" {
   subscription_id                 = var.id_suscripcion
 }
 
+# Esto nos sirve para crear el grupo de recurso
 resource "azurerm_resource_group" "rg" {
   name     = "${var.name_resource_group}-${var.environment}"
   location = var.location
@@ -146,10 +147,31 @@ resource "azurerm_resource_group" "rg" {
   }
 }
 
+# Esto nos ayuda a construir la cuenta de almacenamiento
 resource "azurerm_storage_account" "storage_account" {
-  name                     = "storag0account0bucket0s3"
+  name                     = var.storage_account
   resource_group_name      = azurerm_resource_group.rg.name
   location                 = azurerm_resource_group.rg.location
   account_tier             = "Standard"
   account_replication_type = "LRS"
+}
+
+# Esto nos ayuda a crear el container para almacenamiento de objetos o archivos.
+# usuamos el for_each para que itere sobre el array de variables y nos cree los contenedores deseados
+resource "azurerm_storage_container" "container" {
+  for_each              = toset(var.container)
+  name                  = each.value
+  storage_account_id    = azurerm_storage_account.storage_account.id
+  container_access_type = "private" # Puede ser private, blob o container
+}
+
+resource "azurerm_virtual_network" "vpc" {
+  name = "VirtualNetwor-${var.environment}"
+  location = var.location
+  resource_group_name = azurerm_resource_group.rg.name
+  address_space = ["10.0.0.0/16"]
+  subnet {
+    name = "private-1-${var.environment}"
+    address_prefixes = ["10.0.1.0/24"]
+    }
 }

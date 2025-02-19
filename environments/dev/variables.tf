@@ -77,3 +77,12 @@ variable "name_resource_group" {
   type        = string
   description = "Nombre del grupo de recursos"
 }
+
+variable "container" {
+  type    = list(string)
+  default = ["storagelogs", "movements", "diego"]
+}
+
+variable "storage_account" {
+  type = string
+}
