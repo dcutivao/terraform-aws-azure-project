@@ -83,6 +83,11 @@ variable "container" {
   default = ["storagelogs", "movements", "diego"]
 }
 
-variable "storage_account" {
-  type = string
+variable "vmcount" {
+  type = number
 }
+
+/* variable "storage_account" {
+  type = string
+} */
+

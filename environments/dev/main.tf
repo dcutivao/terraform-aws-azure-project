@@ -147,13 +147,23 @@ resource "azurerm_resource_group" "rg" {
   }
 }
 
+# Esto nos srive para crear el nombre random de la cuenta de almacenamiento
+resource "random_string" "storageaccount-name" {
+  length  = 16
+  special = false
+  upper   = false
+}
+
 # Esto nos ayuda a construir la cuenta de almacenamiento
 resource "azurerm_storage_account" "storage_account" {
-  name                     = var.storage_account
+  name                     = random_string.storageaccount-name.result
   resource_group_name      = azurerm_resource_group.rg.name
   location                 = azurerm_resource_group.rg.location
   account_tier             = "Standard"
   account_replication_type = "LRS"
+  tags = {
+    "environment" = "entorno-${var.environment}"
+  }
 }
 
 # Esto nos ayuda a crear el container para almacenamiento de objetos o archivos.
@@ -165,13 +175,115 @@ resource "azurerm_storage_container" "container" {
   container_access_type = "private" # Puede ser private, blob o container
 }
 
+# Creación de Red virtual vnet
 resource "azurerm_virtual_network" "vpc" {
-  name = "VirtualNetwor-${var.environment}"
-  location = var.location
+  name                = "VirtualNetwor-${var.environment}"
+  location            = var.location
   resource_group_name = azurerm_resource_group.rg.name
-  address_space = ["10.0.0.0/16"]
-  subnet {
-    name = "private-1-${var.environment}"
-    address_prefixes = ["10.0.1.0/24"]
-    }
+  address_space       = ["10.0.0.0/16"]
+  tags = {
+    "environment" = "entorno-${var.environment}"
+  }
+}
+
+# Creación de SG
+resource "azurerm_network_security_group" "sg" {
+  name                = "MiprimerSG"
+  location            = var.location
+  resource_group_name = azurerm_resource_group.rg.name
+  security_rule {
+    name                       = "Allow-SSH"
+    priority                   = 1001
+    direction                  = "Inbound"
+    access                     = "Allow"
+    protocol                   = "Tcp"
+    source_port_range          = "*"
+    destination_port_range     = "22"
+    source_address_prefix      = "*"
+    destination_address_prefix = "*"
+  }
+  tags = {
+    "environment" = "entorno-${var.environment}"
+  }
+}
+
+#creacion de subnet
+resource "azurerm_subnet" "mysubnet" {
+  name                 = "misubnet"
+  resource_group_name  = azurerm_resource_group.rg.name
+  virtual_network_name = azurerm_virtual_network.vpc.name
+  address_prefixes     = ["10.0.1.0/24"]
+}
+
+#Asociación de SG con subnet
+resource "azurerm_subnet_network_security_group_association" "my-sg-association" {
+  subnet_id                 = azurerm_subnet.mysubnet.id
+  network_security_group_id = azurerm_network_security_group.sg.id
+}
+
+# Creación de ip publica
+resource "azurerm_public_ip" "ip" {
+  count               = var.vmcount
+  name                = "ip-publica-${count.index}"
+  location            = var.location
+  resource_group_name = azurerm_resource_group.rg.name
+  allocation_method   = "Dynamic"
+  tags = {
+    "environment" = "entorno-${var.environment}"
+  }
+}
+
+# creacion de tarjeta de red que utilizara la VM
+resource "azurerm_network_interface" "nic-vm" {
+  count               = var.vmcount
+  name                = "nic-vm-${count.index}"
+  location            = var.location
+  resource_group_name = azurerm_resource_group.rg.name
+  ip_configuration {
+    name                          = "ip-vm-${count.index}"
+    subnet_id                     = azurerm_subnet.mysubnet.id
+    private_ip_address_allocation = "Dynamic"
+    public_ip_address_id          = azurerm_public_ip.ip[count.index].id
+  }
+  tags = {
+    "environment" = "entorno-${var.environment}"
+  }
+}
+
+# creacion de maquina virtual VM
+resource "azurerm_virtual_machine" "vm" {
+  count                 = var.vmcount
+  name                  = "vm-${count.index}"
+  location              = var.location
+  resource_group_name   = azurerm_resource_group.rg.name
+  network_interface_ids = [azurerm_network_interface.nic-vm[count.index].id]
+  vm_size               = "Standard_DS2_v2"
+  storage_image_reference {
+    publisher = "Canonical"
+    offer     = "UbuntuServer"
+    sku       = "16.04-LTS"
+    version   = "latest"
+  }
+  storage_os_disk {
+    name              = "myosdisk-${count.index}"
+    caching           = "ReadWrite"
+    create_option     = "FromImage"
+    managed_disk_type = "Standard_LRS"
+  }
+  os_profile {
+    computer_name  = "vm-${count.index}"
+    admin_username = "adminuser"
+    admin_password = "P@ssw0rd1234"
+    #custom_data    = file("${path.module}/userdata.txt")
+  }
+  os_profile_linux_config {
+    disable_password_authentication = false
+  }
+  boot_diagnostics {
+    enabled     = true
+    storage_uri = azurerm_storage_account.storage_account.primary_blob_endpoint
+  }
+  tags = {
+    "environment" = "entorno-${var.environment}"
+  }
 }
