@@ -131,11 +131,6 @@ resource "local_file" "private_key_pem" {
 } */
 
 #-----------------------------------Infraestrucutura Azure--------------------------------------------------------
-provider "azurerm" {
-  features {}
-  resource_provider_registrations = "none" # el argumento "nome" =  Esto significa que Terraform no registrará automáticamente ningún proveedor de recursos en la suscripción de Azure.
-  subscription_id                 = var.id_suscripcion
-}
 
 # Esto nos sirve para crear el grupo de recurso
 resource "azurerm_resource_group" "rg" {
@@ -227,6 +222,7 @@ resource "azurerm_public_ip" "ip" {
   name                = "ip-publica-${count.index}"
   location            = var.location
   resource_group_name = azurerm_resource_group.rg.name
+  sku                 = "Basic"
   allocation_method   = "Dynamic"
   tags = {
     "environment" = "entorno-${var.environment}"
