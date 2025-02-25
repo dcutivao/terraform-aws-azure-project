@@ -132,38 +132,29 @@ resource "local_file" "private_key_pem" {
 
 #-----------------------------------Infraestrucutura Azure--------------------------------------------------------
 
-# Esto nos sirve para crear el grupo de recurso
-resource "azurerm_resource_group" "rg" {
-  name     = "${var.name_resource_group}-${var.environment}"
-  location = var.location
-  tags = {
-    environment = "entorno-${var.environment}"
-    owner       = "Armando"
-  }
+module "resource_group" {
+  source = "../../modules/azure/resource_group"
+
+  name_resource_group = var.name_resource_group
+  location            = var.location
+  environment         = var.environment
+  owner               = var.owner
 }
 
-# Esto nos srive para crear el nombre random de la cuenta de almacenamiento
-resource "random_string" "storageaccount-name" {
-  length  = 16
-  special = false
-  upper   = false
-}
+module "storage_account" {
+  source = "../../modules/azure/storage_account"
 
-# Esto nos ayuda a construir la cuenta de almacenamiento
-resource "azurerm_storage_account" "storage_account" {
-  name                     = random_string.storageaccount-name.result
-  resource_group_name      = azurerm_resource_group.rg.name
-  location                 = azurerm_resource_group.rg.location
-  account_tier             = "Standard"
-  account_replication_type = "LRS"
-  tags = {
-    "environment" = "entorno-${var.environment}"
-  }
+  account_replication_type = var.account_replication_type
+  name_resource_group      = module.resource_group.name_resource_group
+  environment              = module.resource_group.environment
+  location                 = module.resource_group.location
+  owner                    = module.resource_group.owner
+  account_tier             = var.account_tier
 }
 
 # Esto nos ayuda a crear el container para almacenamiento de objetos o archivos.
 # usuamos el for_each para que itere sobre el array de variables y nos cree los contenedores deseados
-resource "azurerm_storage_container" "container" {
+/* resource "azurerm_storage_container" "container" {
   for_each              = toset(var.container)
   name                  = each.value
   storage_account_id    = azurerm_storage_account.storage_account.id
@@ -282,4 +273,4 @@ resource "azurerm_virtual_machine" "vm" {
   tags = {
     "environment" = "entorno-${var.environment}"
   }
-}
+} */

@@ -8,11 +8,6 @@ variable "vpc_cidr" {
   type        = string
 }
 
-variable "environment" {
-  description = "Nombre del entorno (ejemplo: dev, staging, prod)"
-  type        = string
-}
-
 variable "public_subnet_cidrs" {
   description = "Lista de CIDR blocks para las subnets públicas"
   type        = list(string)
@@ -63,7 +58,17 @@ variable "bucket_name" {
   type        = string
 }
 
-#------------------------------------Variables infra Azure---------------------------------------------------------
+#------------------------------------Variables compartidas entre nubes-----------------------------------------------------------------------------
+variable "owner" {
+  description = "Propietario de los recursos desplegados"
+  type        = string
+}
+
+variable "environment" {
+  description = "Nombre del entorno (ejemplo: dev, staging, prod)"
+  type        = string
+}
+#------------------------------------Variables infra Azure--------------------------------------------------------
 variable "location" {
   description = "Region desplegar recursos en Azure"
   type        = string
@@ -84,10 +89,16 @@ variable "container" {
 }
 
 variable "vmcount" {
+  description = "numero de VMs a desplegar"
   type = number
 }
 
-/* variable "storage_account" {
+variable "account_tier"{
+  description = "Nivel de cuenta de Azure Storage"
   type = string
-} */
+}
 
+  variable "account_replication_type"{
+  description = "Tipo de replicacion de Azure Storage"
+  type = string
+  }
