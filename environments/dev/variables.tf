@@ -30,6 +30,7 @@ variable "public_subnet_count" {
 
 variable "private_subnet_count" {
   description = "Número de subnets privadas"
+  type        = number
 }
 
 #--------------------------------------------------------------------------------
@@ -83,9 +84,9 @@ variable "name_resource_group" {
   description = "Nombre del grupo de recursos"
 }
 
-variable "container" {
+variable "storage_container_name" {
   type    = list(string)
-  default = ["storagelogs", "movements", "diego"]
+  default = []
 }
 
 variable "vmcount" {
@@ -102,3 +103,29 @@ variable "account_tier"{
   description = "Tipo de replicacion de Azure Storage"
   type = string
   }
+
+variable "container_access_type" {
+  description = "Tipo de acceso a los contenedores de Azure Storage"
+  type = string
+}
+
+variable "address_space" {
+  description = "CIRD Red virtual"
+  type = list(string)
+}
+
+variable "public_subnets" {
+  description = "Lista de CIDR blocks para las subnets publicas"
+  type = list(object({
+    name           = string
+    address_prefix = string
+  }))
+}
+
+variable "private_subnets" {
+  description = "Lista de CIDR blocks para las subnets privadas"
+  type = list(object({
+    name           = string
+    address_prefix = string
+  }))
+}

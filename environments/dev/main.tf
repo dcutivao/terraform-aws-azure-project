@@ -152,26 +152,24 @@ module "storage_account" {
   account_tier             = var.account_tier
 }
 
-# Esto nos ayuda a crear el container para almacenamiento de objetos o archivos.
-# usuamos el for_each para que itere sobre el array de variables y nos cree los contenedores deseados
-/* resource "azurerm_storage_container" "container" {
-  for_each              = toset(var.container)
-  name                  = each.value
-  storage_account_id    = azurerm_storage_account.storage_account.id
-  container_access_type = "private" # Puede ser private, blob o container
+module "storage_container" {
+  source = "../../modules/azure/storage_container"
+  storage_container_name     = var.storage_container_name
+  container_access_type      = var.container_access_type
+  azurerm_storage_account_id = module.storage_account.azurerm_storage_account_id   # ejemplo de llamar un modulo a otro
 }
 
-# Creación de Red virtual vnet
-resource "azurerm_virtual_network" "vpc" {
-  name                = "VirtualNetwor-${var.environment}"
+module "vnet" {
+  source              = "../../modules/azure/vnet"
   location            = var.location
-  resource_group_name = azurerm_resource_group.rg.name
-  address_space       = ["10.0.0.0/16"]
-  tags = {
-    "environment" = "entorno-${var.environment}"
-  }
+  resource_group_name = module.resource_group.name_resource_group
+  address_space       = var.address_space
+  environment         = var.environment 
+  public_subnets      = var.private_subnets["10.0.${count.index}.0/24"]
+  private_subnets     = var.public_subnets
 }
 
+/*
 # Creación de SG
 resource "azurerm_network_security_group" "sg" {
   name                = "MiprimerSG"
@@ -191,14 +189,6 @@ resource "azurerm_network_security_group" "sg" {
   tags = {
     "environment" = "entorno-${var.environment}"
   }
-}
-
-#creacion de subnet
-resource "azurerm_subnet" "mysubnet" {
-  name                 = "misubnet"
-  resource_group_name  = azurerm_resource_group.rg.name
-  virtual_network_name = azurerm_virtual_network.vpc.name
-  address_prefixes     = ["10.0.1.0/24"]
 }
 
 #Asociación de SG con subnet

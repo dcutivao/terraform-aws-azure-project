@@ -12,3 +12,13 @@ Se realiza el moentaje de la RDS de forma modular, ya que esto permite:
 - ✅ Reutilización: Puedes usar el mismo módulo para diferentes entornos (dev, staging, prod).
 - ✅ Mantenibilidad: Separar la lógica de la base de datos facilita la gestión y actualización.
 - ✅ Seguridad: Puedes aislar configuraciones sensibles y aplicar mejores prácticas.
+
+
+
+Azure
+📂 proyecto-infra/
+├── 📂 modules/
+│ ├── 📂 vnet/ (Crea la VNet y las subredes)
+│ ├── 📂 nsg/ (Crea los Security Groups y asociaciones)
+│ ├── 📂 public_ip/ (Crea las IPs públicas)
+│ ├── 📂 network_interface/ (Crea las NICs y las asocia)

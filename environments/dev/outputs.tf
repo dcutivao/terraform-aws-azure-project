@@ -1,3 +1,5 @@
+#---------------Outputs AWS-------------------------------------------
+
 /* output "vpc_id" {
   value = module.vpc.vpc_id
 }
@@ -10,18 +12,12 @@ output "rds_endpoint" {
   value = module.rds.rds_endpoint
 } */
 
+#---------------Outputs Azure-------------------------------------------
+
 /* output "public_ip_address" {
   value = azurerm_public_ip.ip[*].ip_address
 } */
 
-output "location" {
-  value = module.resource_group.location
-}
-
-output "environment" {
-  value = module.resource_group.environment
-}
-
-output "owner" {
-  value = module.resource_group.owner
-}
+/* output "azurerm_storage_account_id" {
+  value = module.storage_account.azurerm_storage_account_id
+} */
