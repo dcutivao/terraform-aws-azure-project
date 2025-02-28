@@ -20,10 +20,16 @@ variable "address_space" {
 
 variable "public_subnets" {
   description = "Lista de CIDR blocks para las subnets publicas"
-  type = list(string)
+  type = list(object({
+    name           = string
+    address_prefix = string
+  }))
 }
 
 variable "private_subnets" {
   description = "Lista de CIDR blocks para las subnets privadas"
-  type = list(string)
+  type = list(object({
+    name           = string
+    address_prefix = string
+  }))
 }

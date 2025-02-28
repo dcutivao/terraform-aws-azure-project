@@ -91,27 +91,27 @@ variable "storage_container_name" {
 
 variable "vmcount" {
   description = "numero de VMs a desplegar"
-  type = number
+  type        = number
 }
 
-variable "account_tier"{
+variable "account_tier" {
   description = "Nivel de cuenta de Azure Storage"
-  type = string
+  type        = string
 }
 
-  variable "account_replication_type"{
+variable "account_replication_type" {
   description = "Tipo de replicacion de Azure Storage"
-  type = string
-  }
+  type        = string
+}
 
 variable "container_access_type" {
   description = "Tipo de acceso a los contenedores de Azure Storage"
-  type = string
+  type        = string
 }
 
 variable "address_space" {
   description = "CIRD Red virtual"
-  type = list(string)
+  type        = list(string)
 }
 
 variable "public_subnets" {

@@ -14,7 +14,7 @@ resource "azurerm_subnet" "public" {
   name                 = var.public_subnets[count.index].name
   resource_group_name  = var.resource_group_name
   virtual_network_name = azurerm_virtual_network.vnet.name
-  address_prefixes     = [var.public_subnets[count.index].cidr]
+  address_prefixes     = [var.public_subnets[count.index].address_prefix]
 }
 
 resource "azurerm_subnet" "private" {
@@ -22,18 +22,5 @@ resource "azurerm_subnet" "private" {
   name                 = var.private_subnets[count.index].name
   resource_group_name  = var.resource_group_name
   virtual_network_name = azurerm_virtual_network.vnet.name
-  address_prefixes     = [var.private_subnets[count.index].cidr]
+  address_prefixes     = [var.private_subnets[count.index].address_prefix]
 }
-
-
-/* resource "azurerm_virtual_network" "vpc" {
-  resource_group_name = azurerm_resource_group.rg.name 
- 
-
-#creacion de subnet
-resource "azurerm_subnet" "mysubnet" {
-  name                 = "misubnet"
-  resource_group_name  = azurerm_resource_group.rg.name
-  virtual_network_name = azurerm_virtual_network.vpc.name
-  address_prefixes     = ["10.0.1.0/24"]
-}*/

@@ -21,4 +21,4 @@ Azure
 - │ ├── 📂 vnet/ (Crea la VNet y las subredes)
 - │ ├── 📂 nsg/ (Crea los Security Groups y asociaciones)
 - │ ├── 📂 public_ip/ (Crea las IPs públicas)
-* │ ├── 📂 network_interface/ (Crea las NICs y las asocia)
+- │ ├── 📂 network_interface/ (Crea las NICs y las asocia)

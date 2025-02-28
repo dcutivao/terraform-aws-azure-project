@@ -21,3 +21,11 @@ output "rds_endpoint" {
 /* output "azurerm_storage_account_id" {
   value = module.storage_account.azurerm_storage_account_id
 } */
+
+output "salida_privada" {
+  value = module.vnet.private_subnet_ids
+}
+
+output "salida_publica" {
+  value = module.vnet.public_subnet_ids
+}

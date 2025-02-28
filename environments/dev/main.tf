@@ -153,10 +153,10 @@ module "storage_account" {
 }
 
 module "storage_container" {
-  source = "../../modules/azure/storage_container"
+  source                     = "../../modules/azure/storage_container"
   storage_container_name     = var.storage_container_name
   container_access_type      = var.container_access_type
-  azurerm_storage_account_id = module.storage_account.azurerm_storage_account_id   # ejemplo de llamar un modulo a otro
+  azurerm_storage_account_id = module.storage_account.azurerm_storage_account_id # ejemplo de llamar un modulo a otro
 }
 
 module "vnet" {
@@ -164,38 +164,67 @@ module "vnet" {
   location            = var.location
   resource_group_name = module.resource_group.name_resource_group
   address_space       = var.address_space
-  environment         = var.environment 
-  public_subnets      = var.private_subnets["10.0.${count.index}.0/24"]
-  private_subnets     = var.public_subnets
+  environment         = var.environment
+  public_subnets      = var.public_subnets
+  private_subnets     = var.private_subnets
 }
+
+module "nsg" {
+  source      = "../../modules/azure/nsg"
+  environment         = var.environment
+  owner               = var.owner
+  subnet_id_private   = module.vnet.public_subnet_ids
+  network_security_groups = {
+    "nsg-vm" = {
+      location            = var.location
+      resource_group_name = module.resource_group.name_resource_group
+      security_rules = [
+        {
+          name                       = "AllowSSH"
+          priority                   = 100
+          direction                  = "Inbound"
+          access                     = "Allow"
+          protocol                   = "Tcp"
+          source_port_range          = "*"
+          destination_port_range     = "22"
+          source_address_prefix      = "*"
+          destination_address_prefix = "*"
+        },
+        {
+          name                       = "AllowHTTP"
+          priority                   = 200
+          direction                  = "Inbound"
+          access                     = "Allow"
+          protocol                   = "Tcp"
+          source_port_range          = "*"
+          destination_port_range     = "80"
+          source_address_prefix      = "*"
+          destination_address_prefix = "*"
+        }
+      ]
+    },
+    "nsg-mysql" = {
+      location            = var.location
+      resource_group_name = module.resource_group.name_resource_group
+      security_rules = [
+        {
+          name                       = "AllowRDP"
+          priority                   = 100
+          direction                  = "Inbound"
+          access                     = "Allow"
+          protocol                   = "Tcp"
+          source_port_range          = "*"
+          destination_port_range     = "3389"
+          source_address_prefix      = "*"
+          destination_address_prefix = "*"
+        }
+      ]
+    }
+  }
+}
+
 
 /*
-# Creación de SG
-resource "azurerm_network_security_group" "sg" {
-  name                = "MiprimerSG"
-  location            = var.location
-  resource_group_name = azurerm_resource_group.rg.name
-  security_rule {
-    name                       = "Allow-SSH"
-    priority                   = 1001
-    direction                  = "Inbound"
-    access                     = "Allow"
-    protocol                   = "Tcp"
-    source_port_range          = "*"
-    destination_port_range     = "22"
-    source_address_prefix      = "*"
-    destination_address_prefix = "*"
-  }
-  tags = {
-    "environment" = "entorno-${var.environment}"
-  }
-}
-
-#Asociación de SG con subnet
-resource "azurerm_subnet_network_security_group_association" "my-sg-association" {
-  subnet_id                 = azurerm_subnet.mysubnet.id
-  network_security_group_id = azurerm_network_security_group.sg.id
-}
 
 # Creación de ip publica
 resource "azurerm_public_ip" "ip" {
