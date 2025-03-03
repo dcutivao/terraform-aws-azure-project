@@ -1,6 +1,6 @@
 resource "aws_s3_bucket" "this" {
   bucket = "${var.bucket_name}-${var.environment}"
-  tags   = {
+  tags = {
     environment = var.environment
     Terraform   = "true"
   }

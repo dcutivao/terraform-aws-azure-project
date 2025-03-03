@@ -18,14 +18,14 @@ resource "aws_iam_role" "roles" {
 resource "aws_iam_policy" "policies" {
   for_each = var.iam_roles
 
-  name   = "${each.key}-policy"
-  policy = jsonencode( {
-    "Version": "2012-10-17",
-    "Statement": [
+  name = "${each.key}-policy"
+  policy = jsonencode({
+    "Version" : "2012-10-17",
+    "Statement" : [
       {
-        "Effect": each.value.effect,
-        "Action": each.value.action,
-        "Resource": each.value.resource
+        "Effect" : each.value.effect,
+        "Action" : each.value.action,
+        "Resource" : each.value.resource
       }
     ]
   })

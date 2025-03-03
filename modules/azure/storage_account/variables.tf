@@ -10,7 +10,7 @@ variable "environment" {
 
 variable "owner" {
   description = "Propietario de los recursos desplegados"
-  type = string
+  type        = string
 }
 
 variable "name_resource_group" {
@@ -18,12 +18,12 @@ variable "name_resource_group" {
   description = "Nombre del grupo de recursos"
 }
 
-variable "account_tier"{
+variable "account_tier" {
   description = "Nivel de cuenta de Azure Storage"
-  type = string
+  type        = string
 }
 
-  variable "account_replication_type"{
+variable "account_replication_type" {
   description = "Tipo de replicacion de Azure Storage"
-  type = string
-  }
+  type        = string
+}

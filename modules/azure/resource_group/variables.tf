@@ -15,5 +15,5 @@ variable "location" {
 
 variable "owner" {
   description = "Propietario de los recursos desplegados"
-  type = string
+  type        = string
 }

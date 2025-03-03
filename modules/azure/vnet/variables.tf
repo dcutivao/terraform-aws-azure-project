@@ -15,7 +15,7 @@ variable "resource_group_name" {
 
 variable "address_space" {
   description = "CIRD Red virtual"
-  type = list(string)
+  type        = list(string)
 }
 
 variable "public_subnets" {

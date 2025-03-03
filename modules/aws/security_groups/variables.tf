@@ -7,8 +7,8 @@ variable "vpc_id" {
 variable "security_groups" {
   description = "Lista de Security Groups con sus reglas"
   type = list(object({
-    name         = string
-    description  = string
+    name        = string
+    description = string
     ingress_rules = list(object({
       from_port   = number
       to_port     = number

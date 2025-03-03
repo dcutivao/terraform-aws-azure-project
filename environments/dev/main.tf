@@ -232,58 +232,15 @@ module "ip_publis" {
   owner               = var.owner
 }
 
-/*
-# creacion de tarjeta de red que utilizara la VM
-resource "azurerm_network_interface" "nic-vm" {
-  count               = var.vmcount
-  name                = "nic-vm-${count.index}"
+module "vm_count" {
+  source              = "../../modules/azure/vm"
+  vmcount             = var.vmcount
   location            = var.location
-  resource_group_name = azurerm_resource_group.rg.name
-  ip_configuration {
-    name                          = "ip-vm-${count.index}"
-    subnet_id                     = azurerm_subnet.mysubnet.id
-    private_ip_address_allocation = "Dynamic"
-    public_ip_address_id          = azurerm_public_ip.ip[count.index].id
-  }
-  tags = {
-    "environment" = "entorno-${var.environment}"
-  }
+  resource_group_name = module.resource_group.name_resource_group
+  environment         = var.environment
+  owner               = var.owner
+  publisher           = var.publisher
+  offer               = var.offer
+  sku                 = var.sku
+  version             = var.version
 }
-
-# creacion de maquina virtual VM
-resource "azurerm_virtual_machine" "vm" {
-  count                 = var.vmcount
-  name                  = "vm-${count.index}"
-  location              = var.location
-  resource_group_name   = azurerm_resource_group.rg.name
-  network_interface_ids = [azurerm_network_interface.nic-vm[count.index].id]
-  vm_size               = "Standard_DS2_v2"
-  storage_image_reference {
-    publisher = "Canonical"
-    offer     = "UbuntuServer"
-    sku       = "16.04-LTS"
-    version   = "latest"
-  }
-  storage_os_disk {
-    name              = "myosdisk-${count.index}"
-    caching           = "ReadWrite"
-    create_option     = "FromImage"
-    managed_disk_type = "Standard_LRS"
-  }
-  os_profile {
-    computer_name  = "vm-${count.index}"
-    admin_username = "adminuser"
-    admin_password = "P@ssw0rd1234"
-    #custom_data    = file("${path.module}/userdata.txt")
-  }
-  os_profile_linux_config {
-    disable_password_authentication = false
-  }
-  boot_diagnostics {
-    enabled     = true
-    storage_uri = azurerm_storage_account.storage_account.primary_blob_endpoint
-  }
-  tags = {
-    "environment" = "entorno-${var.environment}"
-  }
-} */

@@ -4,12 +4,12 @@ variable "bucket_name" {
 }
 variable "status_versioning" {
   description = "habilitar versionamiento de objetos en el bucket S3"
-  type = string
+  type        = string
 }
 variable "server_side_encryption_configuration" {
   description = "Configuración para encriptación en reposo"
   type        = any
-  default     = {
+  default = {
     rule = {
       apply_server_side_encryption_by_default = {
         sse_algorithm = "AES256"

@@ -129,3 +129,21 @@ variable "private_subnets" {
     address_prefix = string
   }))
 }
+
+variable "publisher" {
+  description = "Nombre del proveedor de la imagen"
+  type        = string
+}
+variable "offer" {
+  description = "Nombre de la oferta de la imagen"
+  type        = string
+}
+variable "sku" {
+  description = "Especifica la versión o edición del sistema operativo"
+  type        = string
+}
+
+variable "version" {
+  description = "Versión de la imagen"
+  type        = string
+}
