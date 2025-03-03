@@ -170,10 +170,10 @@ module "vnet" {
 }
 
 module "nsg" {
-  source      = "../../modules/azure/nsg"
-  environment         = var.environment
-  owner               = var.owner
-  subnet_id_private   = module.vnet.public_subnet_ids
+  source            = "../../modules/azure/nsg"
+  environment       = var.environment
+  owner             = var.owner
+  subnet_id_private = module.vnet.public_subnet_ids
   network_security_groups = {
     "nsg-vm" = {
       location            = var.location
@@ -223,22 +223,16 @@ module "nsg" {
   }
 }
 
-
-/*
-
-# Creación de ip publica
-resource "azurerm_public_ip" "ip" {
-  count               = var.vmcount
-  name                = "ip-publica-${count.index}"
+module "ip_publis" {
+  source              = "../../modules/azure/ip-publics"
+  resource_group_name = module.resource_group.name_resource_group
+  vmcount             = var.vmcount
   location            = var.location
-  resource_group_name = azurerm_resource_group.rg.name
-  sku                 = "Basic"
-  allocation_method   = "Dynamic"
-  tags = {
-    "environment" = "entorno-${var.environment}"
-  }
+  environment         = var.environment
+  owner               = var.owner
 }
 
+/*
 # creacion de tarjeta de red que utilizara la VM
 resource "azurerm_network_interface" "nic-vm" {
   count               = var.vmcount
