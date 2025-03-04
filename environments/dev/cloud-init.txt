@@ -1,0 +1,12 @@
+#cloud-config
+package_update: true
+packages:
+  - nginx
+  - curl
+# users:
+#  - name: adminuser
+#    ssh-authorized-keys:
+#      - ssh-rsa AAAAB3NzaC1yc2E... (tu clave pública SSH)
+runcmd:
+  - systemctl enable nginx
+  - systemctl start nginx

@@ -1,5 +1,5 @@
 # Creacion de maquina virtual VM
-resource "azurerm_linux_virtual_machine" "example" {
+resource "azurerm_linux_virtual_machine" "vm_linux" {
   count                 = var.vmcount
   name                  = "vm-${count.index}"
   resource_group_name   = var.resource_group_name
@@ -10,7 +10,7 @@ resource "azurerm_linux_virtual_machine" "example" {
 
   admin_ssh_key {
     username   = "adminuser"
-    public_key = file("~/.ssh/id_rsa.pub") # Ruta a tu clave pública
+    public_key = file("~/.ssh/id_rsa.pub") # Ruta a tu clave pública ejemplo: "~/.ssh/id_rsa.pub"
   }
 
   os_disk {
@@ -23,20 +23,18 @@ resource "azurerm_linux_virtual_machine" "example" {
     publisher = var.publisher
     offer     = var.offer
     sku       = var.sku
-    version   = var.version
+    version   = var.vm_version
   }
 
   boot_diagnostics {
-    storage_account_uri = azurerm_storage_account.storage_account.primary_blob_endpoint
+    storage_account_uri = var.azurerm_storage_account_storage_account
   }
+
+  custom_data = filebase64("cloud-init.txt")
   tags = {
     "environment" = "entorno-${var.environment}"
     "owner"       = var.owner
   }
-
-  /* os_profile_linux_config {
-    disable_password_authentication = true
-  } */
 }
 
 
@@ -48,9 +46,9 @@ resource "azurerm_network_interface" "nic-vm" {
   resource_group_name = var.resource_group_name
   ip_configuration {
     name                          = "ip-vm-${count.index}"
-    subnet_id                     = azurerm_subnet.mysubnet.id
+    subnet_id                     = var.public_subnet_ids[count.index] #azurerm_subnet.mysubnet.id
     private_ip_address_allocation = "Dynamic"
-    public_ip_address_id          = azurerm_public_ip.ip[count.index].id
+    public_ip_address_id          = var.list_ip_public[count.index] #azurerm_public_ip.ip[count.index].id
   }
   tags = {
     "environment" = "entorno-${var.environment}"

@@ -1,7 +1,4 @@
 #-----------------------------------Infraestrucutura AWS--------------------------------------------------------
-/* provider "aws" {
-  region = var.aws_region
-}
 module "vpc" {
   source               = "../../modules/aws/vpc"
   vpc_cidr             = var.vpc_cidr
@@ -39,9 +36,9 @@ module "security_groups" {
       ]
     }
   ]
-} */
+}
 
-/* module "iam" {
+module "iam" {
   source = "../../modules/aws/iam"
 
   iam_roles = {
@@ -65,23 +62,14 @@ module "security_groups" {
       service               = "s3.amazonaws.com"
       policy_file           = "s3_policy.json"
     }*/
-#  }
-#} */
-
-/* resource "tls_private_key" "generated" {
-  algorithm = "RSA"
+  }
 }
 
-resource "aws_key_pair" "generated" {
-  key_name   = "AWS-Key-${var.environment}"
-  public_key = tls_private_key.generated.public_key_openssh
+module "keys" {
+  source      = "../../modules/key"
+  environment = var.environment
 }
-resource "local_file" "private_key_pem" {
-  content   = tls_private_key.generated.private_key_pem
-  filename  = "AWS-Key-${var.environment}.pem"                                                           # en este apartado podemos indicar la ruta donde queremos que repose nuestra key("/home/armando/Descargas/MyAWSKey.pem") o solo con el nombre queda local 
-} */
-
-/* module "ec2" {
+module "ec2" {
   source = "../../modules/aws/ec2"
 
   aws_region  = var.aws_region
@@ -90,23 +78,22 @@ resource "local_file" "private_key_pem" {
   instances = {
     "web-server" = {
       instance_type = "t2.micro"
-      # Red a la que pertenecera public o private y la posicion según el indexado de la lista en el archivo terraform.tfvars
       subnet_id            = module.vpc.public_subnets[1]
       os                   = "amazon"
       security_groups      = [module.security_groups.security_group_ids["ec2-sg"]]
       iam_instance_profile = module.iam.iam_instance_profiles["EC2Role"]
-      key_name             = aws_key_pair.generated.key_name
+      key_name             = module.keys.aws_key_pair #aws_key_pair.generated.key_name
     }
-    "db-server" = {
+    /* "db-server" = {
       instance_type        = "t2.micro"
       subnet_id            = module.vpc.private_subnets[0] # esto es la salida del ouput de la variable private_subnets del modulo ec2
       os                   = "ubuntu"
       security_groups      = [module.security_groups.security_group_ids["rds-sg"], module.security_groups.security_group_ids["ec2-sg"]]
       iam_instance_profile = module.iam.iam_instance_profiles["EC2Role"]
-      key_name             = aws_key_pair.generated.key_name
-    }
+      key_name             = module.keys.aws_key_pair.key_name
+    } */
   }
-} */
+}
 
 /* module "rds" {
   source             = "../../modules/aws/rds"
@@ -123,12 +110,12 @@ resource "local_file" "private_key_pem" {
   environment        = var.environment
 } */
 
-/* module "s3_bucket" {
+module "s3_bucket" {
   source            = "../../modules/aws/s3"
   bucket_name       = var.bucket_name
   status_versioning = "Disabled" # habilitar use Enabled
   environment       = var.environment
-} */
+}
 
 #-----------------------------------Infraestrucutura Azure--------------------------------------------------------
 
@@ -233,14 +220,18 @@ module "ip_publis" {
 }
 
 module "vm_count" {
-  source              = "../../modules/azure/vm"
-  vmcount             = var.vmcount
-  location            = var.location
-  resource_group_name = module.resource_group.name_resource_group
-  environment         = var.environment
-  owner               = var.owner
-  publisher           = var.publisher
-  offer               = var.offer
-  sku                 = var.sku
-  version             = var.version
+  source                                  = "../../modules/azure/vm"
+  vmcount                                 = var.vmcount
+  location                                = var.location
+  resource_group_name                     = module.resource_group.name_resource_group
+  environment                             = var.environment
+  owner                                   = var.owner
+  publisher                               = var.publisher
+  offer                                   = var.offer
+  sku                                     = var.sku
+  vm_version                              = var.vm_version
+  list_ip_public                          = module.ip_publis.list_ip_public
+  public_subnet_ids                       = module.vnet.public_subnet_ids
+  private_subnet_ids                      = module.vnet.private_subnet_ids
+  azurerm_storage_account_storage_account = module.storage_account.azurerm_storage_account_storage_account
 }

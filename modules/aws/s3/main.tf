@@ -36,18 +36,3 @@ resource "aws_s3_bucket_server_side_encryption_configuration" "bucket_encryption
     }
   }
 }
-
-/* resource "aws_iam_policy" "policy-bucket-daco" {
-  name        = "bucket_policy-${var.bucket_name}"
-  description = "Allow access to bucket-${var.bucket_name}"
-  policy = jsonencode({
-    "Version" : "2012-10-17",
-    "Statement" : [
-      {
-        "Effect" : "Allow",
-        "Action" : ["s3:Get*", "s3:List*"],
-        "Resource" : "${aws_s3_bucket.this.arn}"
-      }
-    ]
-  })
-} */
