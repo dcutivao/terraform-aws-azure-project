@@ -12,7 +12,7 @@ resource "local_file" "private_key_pem" {
   file_permission      = "0400"
 }
 
-resource "local_file" "public_key_pem" {
+resource "local_file" "public_key_pub" {
   content  = tls_private_key.generated.public_key_openssh
   filename = "${path.root}/_keys/aws-key-${var.environment}.pub"
   file_permission      = "0400"
