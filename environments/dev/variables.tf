@@ -147,3 +147,13 @@ variable "vm_version" {
   description = "Versión de la imagen"
   type        = string
 }
+
+variable "administrator_login" {
+  description = "Nombre de usuario del administrador de la base de datos Azure"
+  type        = string
+}
+
+variable "administrator_password" {
+  description = "Contraseña del administrador de la base de datos Azure"
+  type        = string
+}

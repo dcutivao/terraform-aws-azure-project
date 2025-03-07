@@ -12,6 +12,11 @@ variable "subnet_id_private" {
   description = "ID de la subred a la que se conectará el recurso"
 }
 
+variable "vm_network_interface" {
+  description = "ID de la interfaz de red de Azure"
+  type = string
+}
+
 variable "network_security_groups" {
   type = map(object({
     location            = string

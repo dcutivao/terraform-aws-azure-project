@@ -40,7 +40,7 @@ variable "vm_version" {
   type        = string
 }
 
-variable "azurerm_storage_account_storage_account"{
+variable "azurerm_storage_account_storage_account" {
   description = "Nombre del almacenamiento"
   type        = string
 }

@@ -28,7 +28,7 @@ resource "azurerm_subnet_network_security_group_association" "example" {
 }
 
 # Asociar SG a una inteface
-/* resource "azurerm_network_interface_security_group_association" "example" {
-  network_interface_id      = azurerm_network_interface.example.id
+resource "azurerm_network_interface_security_group_association" "example" {
+  network_interface_id      = var.vm_network_interface
   network_security_group_id = azurerm_network_security_group.nsg["nsg-vm"].id
-} */
+}

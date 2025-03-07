@@ -1,5 +1,5 @@
 #-----------------------------------Infraestrucutura AWS--------------------------------------------------------
-module "vpc" {
+/* module "vpc" {
   source               = "../../modules/aws/vpc"
   vpc_cidr             = var.vpc_cidr
   environment          = var.environment
@@ -8,9 +8,9 @@ module "vpc" {
   availability_az      = var.availability_az
   public_subnet_count  = var.public_subnet_count
   private_subnet_count = var.private_subnet_count
-}
+} */
 
-module "security_groups" {
+/* module "security_groups" {
   source = "../../modules/aws/security_groups"
   vpc_id = module.vpc.vpc_id
   security_groups = [
@@ -36,9 +36,9 @@ module "security_groups" {
       ]
     }
   ]
-}
+} */
 
-module "iam" {
+/* module "iam" {
   source = "../../modules/aws/iam"
 
   iam_roles = {
@@ -62,10 +62,10 @@ module "iam" {
       service               = "s3.amazonaws.com"
       policy_file           = "s3_policy.json"
     }*/
-  }
-}
+#  }
+#} */
 
-module "keys" {
+/* module "keys" {
   source      = "../../modules/key"
   environment = var.environment
 }
@@ -77,7 +77,7 @@ module "ec2" {
   environment = var.environment
   instances = {
     "web-server" = {
-      instance_type = "t2.micro"
+      instance_type        = "t2.micro"
       subnet_id            = module.vpc.public_subnets[1]
       os                   = "amazon"
       security_groups      = [module.security_groups.security_group_ids["ec2-sg"]]
@@ -92,8 +92,8 @@ module "ec2" {
       iam_instance_profile = module.iam.iam_instance_profiles["EC2Role"]
       key_name             = module.keys.aws_key_pair.key_name
     } */
-  }
-}
+#  }
+#} */
 
 /* module "rds" {
   source             = "../../modules/aws/rds"
@@ -110,12 +110,12 @@ module "ec2" {
   environment        = var.environment
 } */
 
-module "s3_bucket" {
+/* module "s3_bucket" {
   source            = "../../modules/aws/s3"
   bucket_name       = var.bucket_name
   status_versioning = "Disabled" # habilitar use Enabled
   environment       = var.environment
-}
+} */
 
 #-----------------------------------Infraestrucutura Azure--------------------------------------------------------
 
@@ -160,7 +160,8 @@ module "nsg" {
   source            = "../../modules/azure/nsg"
   environment       = var.environment
   owner             = var.owner
-  subnet_id_private = module.vnet.public_subnet_ids
+  subnet_id_private = module.vnet.private_subnet_ids
+  vm_network_interface = module.vm.vm_network_interface
   network_security_groups = {
     "nsg-vm" = {
       location            = var.location
@@ -201,7 +202,7 @@ module "nsg" {
           access                     = "Allow"
           protocol                   = "Tcp"
           source_port_range          = "*"
-          destination_port_range     = "3389"
+          destination_port_range     = "3306"
           source_address_prefix      = "*"
           destination_address_prefix = "*"
         }
@@ -219,7 +220,7 @@ module "ip_publis" {
   owner               = var.owner
 }
 
-module "vm_count" {
+module "vm" {
   source                                  = "../../modules/azure/vm"
   vmcount                                 = var.vmcount
   location                                = var.location
@@ -234,4 +235,15 @@ module "vm_count" {
   public_subnet_ids                       = module.vnet.public_subnet_ids
   private_subnet_ids                      = module.vnet.private_subnet_ids
   azurerm_storage_account_storage_account = module.storage_account.azurerm_storage_account_storage_account
+}
+
+module "database" {
+  source                 = "../../modules/azure/database"
+  resource_group_name    = module.resource_group.name_resource_group
+  environment            = var.environment
+  location               = var.location
+  owner                  = var.owner
+  administrator_login    = var.administrator_login
+  administrator_password = var.administrator_password
+  subnet_id_private      = module.vnet.private_subnet_ids
 }

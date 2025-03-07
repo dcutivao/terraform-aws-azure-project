@@ -23,4 +23,16 @@ resource "azurerm_subnet" "private" {
   resource_group_name  = var.resource_group_name
   virtual_network_name = azurerm_virtual_network.vnet.name
   address_prefixes     = [var.private_subnets[count.index].address_prefix]
+
+# ajuste que se requiere para que el subred privada no tenga acceso a internet
+    delegation {
+    name = "mysql-delegation"
+
+    service_delegation {
+      name = "Microsoft.DBforMySQL/flexibleServers"
+      actions = [
+        "Microsoft.Network/virtualNetworks/subnets/join/action",
+      ]
+    }
+  }
 }
