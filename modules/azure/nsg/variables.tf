@@ -14,7 +14,7 @@ variable "subnet_id_private" {
 
 variable "vm_network_interface" {
   description = "ID de la interfaz de red de Azure"
-  type = string
+  type        = string
 }
 
 variable "network_security_groups" {

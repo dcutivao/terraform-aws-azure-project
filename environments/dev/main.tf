@@ -1,5 +1,5 @@
 #-----------------------------------Infraestrucutura AWS--------------------------------------------------------
-/* module "vpc" {
+module "vpc" {
   source               = "../../modules/aws/vpc"
   vpc_cidr             = var.vpc_cidr
   environment          = var.environment
@@ -8,9 +8,9 @@
   availability_az      = var.availability_az
   public_subnet_count  = var.public_subnet_count
   private_subnet_count = var.private_subnet_count
-} */
+}
 
-/* module "security_groups" {
+module "security_groups" {
   source = "../../modules/aws/security_groups"
   vpc_id = module.vpc.vpc_id
   security_groups = [
@@ -19,7 +19,8 @@
       description = "Security Group para EC2"
       ingress_rules = [
         { from_port = 22, to_port = 22, protocol = "tcp", cidr_blocks = ["0.0.0.0/0"] },
-        { from_port = 80, to_port = 80, protocol = "tcp", cidr_blocks = ["0.0.0.0/0"] }
+        { from_port = 80, to_port = 80, protocol = "tcp", cidr_blocks = ["0.0.0.0/0"] },
+        { from_port = -1, to_port = -1, protocol = "icmp", cidr_blocks = ["0.0.0.0/0"] }
       ]
       egress_rules = [
         { from_port = 0, to_port = 0, protocol = "-1", cidr_blocks = ["0.0.0.0/0"] }
@@ -36,9 +37,9 @@
       ]
     }
   ]
-} */
+}
 
-/* module "iam" {
+module "iam" {
   source = "../../modules/aws/iam"
 
   iam_roles = {
@@ -62,10 +63,10 @@
       service               = "s3.amazonaws.com"
       policy_file           = "s3_policy.json"
     }*/
-#  }
-#} */
+  }
+}
 
-/* module "keys" {
+module "keys" {
   source      = "../../modules/key"
   environment = var.environment
 }
@@ -92,8 +93,8 @@ module "ec2" {
       iam_instance_profile = module.iam.iam_instance_profiles["EC2Role"]
       key_name             = module.keys.aws_key_pair.key_name
     } */
-#  }
-#} */
+  }
+}
 
 /* module "rds" {
   source             = "../../modules/aws/rds"
@@ -110,12 +111,20 @@ module "ec2" {
   environment        = var.environment
 } */
 
-/* module "s3_bucket" {
+module "s3_bucket" {
   source            = "../../modules/aws/s3"
   bucket_name       = var.bucket_name
   status_versioning = "Disabled" # habilitar use Enabled
   environment       = var.environment
-} */
+}
+
+module "vpn-aws" {
+  source            = "../../modules/aws/vpn"
+  vpc_id            = module.vpc.vpc_id
+  azurerm_public_ip = module.vpn-azure.azurerm_public_ip
+  environment       = var.environment
+  owner             = var.owner
+}
 
 #-----------------------------------Infraestrucutura Azure--------------------------------------------------------
 
@@ -157,10 +166,10 @@ module "vnet" {
 }
 
 module "nsg" {
-  source            = "../../modules/azure/nsg"
-  environment       = var.environment
-  owner             = var.owner
-  subnet_id_private = module.vnet.private_subnet_ids
+  source               = "../../modules/azure/nsg"
+  environment          = var.environment
+  owner                = var.owner
+  subnet_id_private    = module.vnet.private_subnet_ids
   vm_network_interface = module.vm.vm_network_interface
   network_security_groups = {
     "nsg-vm" = {
@@ -186,6 +195,17 @@ module "nsg" {
           protocol                   = "Tcp"
           source_port_range          = "*"
           destination_port_range     = "80"
+          source_address_prefix      = "*"
+          destination_address_prefix = "*"
+        },
+        {
+          name                       = "AlloICMP"
+          priority                   = 101
+          direction                  = "Inbound"
+          access                     = "Allow"
+          protocol                   = "Icmp"
+          source_port_range          = "*"
+          destination_port_range     = "*"
           source_address_prefix      = "*"
           destination_address_prefix = "*"
         }
@@ -237,7 +257,7 @@ module "vm" {
   azurerm_storage_account_storage_account = module.storage_account.azurerm_storage_account_storage_account
 }
 
-module "database" {
+/* module "database" {
   source                 = "../../modules/azure/database"
   resource_group_name    = module.resource_group.name_resource_group
   environment            = var.environment
@@ -246,4 +266,15 @@ module "database" {
   administrator_login    = var.administrator_login
   administrator_password = var.administrator_password
   subnet_id_private      = module.vnet.private_subnet_ids
+} */
+
+module "vpn-azure" {
+  source              = "../../modules/azure/vpn"
+  owner               = var.owner
+  location            = var.location
+  environment         = var.environment
+  resource_group_name = module.resource_group.name_resource_group
+  aws_vpn_connection  = module.vpn-aws.aws_vpn_connection
+  address_space       = var.public_subnet_cidrs
+  subnet_id           = module.vnet.public_subnet_daco
 }
