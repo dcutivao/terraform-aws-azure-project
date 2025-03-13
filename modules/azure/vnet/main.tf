@@ -37,9 +37,10 @@ resource "azurerm_subnet" "private" {
   }
 }
 
+# Se usa para la subred de la puerta de enlace para la VPN
 resource "azurerm_subnet" "gateway_subnet" {
   name                 = "GatewaySubnet"  # Nombre debe ser exacto
   resource_group_name  = var.resource_group_name
   virtual_network_name = azurerm_virtual_network.vnet.name
-  address_prefixes     = ["10.0.5.0/24"]  # Espacio de direcciones válido
+  address_prefixes     = ["10.0.5.0/29"]  # Espacio de direcciones válido
 }

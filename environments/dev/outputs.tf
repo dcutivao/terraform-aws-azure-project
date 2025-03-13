@@ -33,3 +33,7 @@ output "salida_publica" {
 /* output "mysql_connection_string" {
   value = module.database.mysql_connection_string
 } */
+
+output "ip_vpn" {
+  value = module.ip_publis.ip_vpn
+}

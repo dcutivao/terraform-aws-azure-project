@@ -121,10 +121,19 @@ module "s3_bucket" {
 module "vpn-aws" {
   source            = "../../modules/aws/vpn"
   vpc_id            = module.vpc.vpc_id
-  azurerm_public_ip = module.vpn-azure.azurerm_public_ip
+  azurerm_public_ip = module.ip_publis.ip_vpn
   environment       = var.environment
   owner             = var.owner
 }
+
+/* module "aws_route_table" {
+  source      = "../../modules/aws/route_table"
+  gateway_id  = module.vpn-aws.gateway_id
+  vpc_id      = module.vpc.vpc_id
+  environment = var.environment
+  owner       = var.owner
+  subnet_id   = module.vpc.public_subnets
+} */
 
 #-----------------------------------Infraestrucutura Azure--------------------------------------------------------
 
@@ -269,12 +278,21 @@ module "vm" {
 } */
 
 module "vpn-azure" {
-  source              = "../../modules/azure/vpn"
-  owner               = var.owner
+  source               = "../../modules/azure/vpn"
+  owner                = var.owner
+  location             = var.location
+  environment          = var.environment
+  resource_group_name  = module.resource_group.name_resource_group
+  gateway_address      = module.vpn-aws.aws_vpn_connection_address
+  address_space        = var.public_subnet_cidrs
+  subnet_id            = module.vnet.public_subnet_daco
+  shared_key           = module.vpn-aws.aws_vpn_connection_key
+  public_ip_address_id = module.ip_publis.id_vpn
+}
+
+module "azure_route_table" {
+  source = "../../modules/azure/route_table"
   location            = var.location
-  environment         = var.environment
   resource_group_name = module.resource_group.name_resource_group
-  aws_vpn_connection  = module.vpn-aws.aws_vpn_connection
-  address_space       = var.public_subnet_cidrs
-  subnet_id           = module.vnet.public_subnet_daco
+  public_subnet_ids   = module.vnet.public_subnet_ids
 }

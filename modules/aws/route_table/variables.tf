@@ -1,3 +1,8 @@
+variable "gateway_id" {
+  description = "The ID of the gateway"
+  type        = string
+}
+
 variable "vpc_id" {
   description = "The ID of the VPC"
   type        = string
@@ -13,7 +18,7 @@ variable "environment" {
   type        = string
 }
 
-variable "azurerm_public_ip" {
-  description = "Public IP de Azure"
-  type = string
+variable "subnet_id" {
+  description = "ID de la subred"
+  type = list(string)
 }

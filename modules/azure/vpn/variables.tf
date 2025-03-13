@@ -18,7 +18,7 @@ variable "location" {
   type        = string
 }
 
-variable "aws_vpn_connection" {
+variable "gateway_address" {
   description = "Nombre de la conexión VPN de AWS"
   type        = string
 }
@@ -31,4 +31,14 @@ variable "address_space" {
 variable "subnet_id" {
   description = "ID de la subred a la que se conectará la VPN"
   type = string
+}
+
+variable "shared_key" {
+  description = "Clave compartida para la autenticación de la VPN"
+  type = string
+}
+
+variable "public_ip_address_id" {
+  description = "Nombre de la IP pública de Azure"
+  type        = string
 }
