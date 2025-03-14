@@ -32,47 +32,47 @@
 ************************************************************************
 ## Estructura del Proyecto
 
-- 📂 terraform-aws-azure-project/
-- │── 📂 environments/
-- │   ├── 📂 dev/
-- │   │   ├── backend.tf
-- │   │   ├── cloud-init.txt
-- │   │   ├── main.tf
-- │   │   ├── outputs.tf
-- │   │   ├── provider.tf
-- │   │   ├── terraform.tfvars
-- │   │   ├── variables.tf
-- │   ├── 📂  prod/
-- │   ├── 📂 staging/
-- │── 📂 modules/
-- │   ├── 📂 aws/
-- │   │   ├── 📂 ec2/
-- │   │   ├── 📂 iam/
-- │   │   ├── 📂 rds/
-- │   │   ├── 📂 route_table/
-- │   │   ├── 📂 s3/
-- │   │   ├── 📂 security_groups/
-- │   │   ├── 📂 vpc/
-- │   │   ├── 📂 vpn/
-- │   ├── 📂 azure/
-- │   │   ├── 📂 database/
-- │   │   ├── 📂 ip-publics/
-- │   │   ├── 📂 nsg/
-- │   │   ├── 📂 resource_group/
-- │   │   ├── 📂 route_table/
-- │   │   ├── 📂 storage_account/
-- │   │   ├── 📂 storage_container/
-- │   │   ├── 📂 vm/
-- │   │   ├── 📂 vnet/
-- │   │   ├── 📂 vpn/
-- │   ├── 📂 key/
-- │── README.md
-- │── .gitignore
-- │── Infraestructura_aws_&_azure.svg
+📂 terraform-aws-azure-project/  
+│── 📂 environments/  
+│   ├── 📂 dev/  
+│   │   ├── backend.tf  
+│   │   ├── cloud-init.txt  
+│   │   ├── main.tf  
+│   │   ├── outputs.tf  
+│   │   ├── provider.tf  
+│   │   ├── terraform.tfvars  
+│   │   ├── variables.tf  
+│   ├── 📂  prod/  
+│   ├── 📂 staging/  
+│── 📂 modules/  
+│   ├── 📂 aws/  
+│   │   ├── 📂 ec2/  
+│   │   ├── 📂 iam/  
+│   │   ├── 📂 rds/  
+│   │   ├── 📂 route_table/  
+│   │   ├── 📂 s3/  
+│   │   ├── 📂 security_groups/  
+│   │   ├── 📂 vpc/  
+│   │   ├── 📂 vpn/  
+│   ├── 📂 azure/  
+│   │   ├── 📂 database/  
+│   │   ├── 📂 ip-publics/  
+│   │   ├── 📂 nsg/  
+│   │   ├── 📂 resource_group/  
+│   │   ├── 📂 route_table/  
+│   │   ├── 📂 storage_account/  
+│   │   ├── 📂 storage_container/  
+│   │   ├── 📂 vm/  
+│   │   ├── 📂 vnet/  
+│   │   ├── 📂 vpn/  
+│   ├── 📂 key/  
+│── README.md  
+│── .gitignore  
+│── Infraestructura_aws_&_azure.svg  
 
 ************************************************************************
 * El archivo **cloud-init.txt** contiene instrucciones en formato **YAML** que se ejecutan dentro de la VM cuando inicia por primera vez en azure
-* los directorios prod/ y **staging/** cuentan con los mismos archivos que se alojan en el directorio **dev/** se realiza ajustes en el archivo **terraform.tfvars** para desplegar en otra region o locación, archivo **backend.tf** para indicar el almacenamiento del **terraform.tfstate**
+* los directorios **prod/** y **staging/** cuentan con los mismos archivos que se alojan en el directorio **dev/** se realiza ajustes en el archivo **terraform.tfvars** para desplegar en otra region o locación, archivo **backend.tf** para indicar el almacenamiento del **terraform.tfstate**
 
 ************************************************************************
 
