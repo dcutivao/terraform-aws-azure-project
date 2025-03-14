@@ -83,7 +83,3 @@
 
 ![Diagrama de Infraestrucutura](./Infraestructura_aws_&_azure.svg)
 
-<p align="center">
-  <img src="./Infraestructura_aws_&_azure.svg" alt="Arquitectura VPN Multi-Nube" width="600"/>
-</p>
-
