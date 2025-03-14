@@ -36,14 +36,14 @@
 - │── 📂 environments/
 - │   ├── 📂 dev/
 - │   │   ├── backend.tf
-- │   │   ├── cloud-init.txt    # Este archivo contiene instrucciones en YAML que se ejecutan cuando la VM inicia en azure
+- │   │   ├── cloud-init.txt
 - │   │   ├── main.tf
 - │   │   ├── outputs.tf
 - │   │   ├── provider.tf
 - │   │   ├── terraform.tfvars
 - │   │   ├── variables.tf
-- │   ├── 📂  prod/             # Cuenta con los mismos archivos que el directorio dev/ se realiza ajustes en terraform.tfvars para desplegar en otra region
-- │   ├── 📂 staging/           # Cuenta con los mismos archivos que el directorio dev/ se realiza ajustes en terraform.tfvars para desplegar en otra region
+- │   ├── 📂  prod/
+- │   ├── 📂 staging/
 - │── 📂 modules/
 - │   ├── 📂 aws/
 - │   │   ├── 📂 ec2/
@@ -69,6 +69,9 @@
 - │── README.md
 - │── .gitignore
 - │── Infraestructura_aws_&_azure.svg
+
+    * El archivo **cloud-init.txt** contiene instrucciones en formato **YAML** que se ejecutan dentro de la VM cuando inicia por primera vez en azure
+    * los directorios prod/ y **staging/** cuentan con los mismos archivos que se alojan en el directorio **dev/** se realiza ajustes en el archivo **terraform.tfvars** para desplegar en otra region o locación, archivo **backend.tf** para indicar el almacenamiento del **terraform.tfstate**
 
 ************************************************************************
 
