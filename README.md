@@ -22,6 +22,12 @@
 - ✅ Mantenibilidad: Separar la lógica de la base de datos facilita la gestión y actualización.
 - ✅ Seguridad: Puedes aislar configuraciones sensibles y aplicar mejores prácticas.
 
+************************************************************************
+
+## Diagrama de Infraestrucutura
+
+![Diagrama de Infraestrucutura](./Infraestructura_aws_&_azure.svg)
+
 
 ************************************************************************
 ## Estructura del Proyecto
@@ -30,28 +36,14 @@
 - │── 📂 environments/
 - │   ├── 📂 dev/
 - │   │   ├── backend.tf
-- │   │   ├── cloud-init.txt
+- │   │   ├── cloud-init.txt    # Este archivo contiene instrucciones en YAML que se ejecutan cuando la VM inicia en azure
 - │   │   ├── main.tf
 - │   │   ├── outputs.tf
 - │   │   ├── provider.tf
 - │   │   ├── terraform.tfvars
 - │   │   ├── variables.tf
-- │   ├── 📂  prod/
-- │   │   ├── backend.tf
-- │   │   ├── cloud-init.txt
-- │   │   ├── main.tf
-- │   │   ├── outputs.tf
-- │   │   ├── provider.tf
-- │   │   ├── terraform.tfvars
-- │   │   ├── variables.tf
-- │   ├── 📂 staging/
-- │   │   ├── backend.tf
-- │   │   ├── cloud-init.txt
-- │   │   ├── main.tf
-- │   │   ├── outputs.tf
-- │   │   ├── provider.tf
-- │   │   ├── terraform.tfvars
-- │   │   ├── variables.tf
+- │   ├── 📂  prod/             # Cuenta con los mismos archivos que el directorio dev/ se realiza ajustes en terraform.tfvars para desplegar en otra region
+- │   ├── 📂 staging/           # Cuenta con los mismos archivos que el directorio dev/ se realiza ajustes en terraform.tfvars para desplegar en otra region
 - │── 📂 modules/
 - │   ├── 📂 aws/
 - │   │   ├── 📂 ec2/
@@ -79,7 +71,4 @@
 - │── Infraestructura_aws_&_azure.svg
 
 ************************************************************************
-## Diagrama de Infraestrucutura
-
-![Diagrama de Infraestrucutura](./Infraestructura_aws_&_azure.svg)
 
