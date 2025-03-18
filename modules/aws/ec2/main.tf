@@ -8,6 +8,7 @@ resource "aws_instance" "ec2" {
   key_name               = each.value.key_name
 
   tags = {
+    Name        = "${each.key}-${var.environment}"
     environment = var.environment
     Terraform   = "true"
   }

@@ -27,6 +27,6 @@ variable "administrator_password" {
   type        = string
 }
 
-variable "subnet_id_private" {
+variable "delegated_subnet_id" {
   description = "ID de la subred a la que se conectará el recurso"
 }

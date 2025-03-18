@@ -23,9 +23,25 @@ resource "azurerm_subnet" "private" {
   resource_group_name  = var.resource_group_name
   virtual_network_name = azurerm_virtual_network.vnet.name
   address_prefixes     = [var.private_subnets[count.index].address_prefix]
+}
 
-  # ajuste que se requiere para que el subred privada no tenga acceso a internet
-  delegation {
+# Se usa para la subred de la puerta de enlace para la VPN
+resource "azurerm_subnet" "gateway_subnet" {
+  name                 = "GatewaySubnet"  # Nombre debe ser exacto
+  resource_group_name  = var.resource_group_name
+  virtual_network_name = azurerm_virtual_network.vnet.name
+  address_prefixes     = ["10.0.5.0/29"]  # Espacio de direcciones válido
+}
+
+
+resource "azurerm_subnet" "db_subnet" {
+  name                 = "Subnet_DB_${var.environment}"  # Nombre debe ser exacto
+  resource_group_name  = var.resource_group_name
+  virtual_network_name = azurerm_virtual_network.vnet.name
+  address_prefixes     = ["10.0.6.0/24"]
+
+   # ajuste que se requiere para que el subred privada no tenga acceso a internet
+   delegation {
     name = "mysql-delegation"
 
     service_delegation {
@@ -35,12 +51,4 @@ resource "azurerm_subnet" "private" {
       ]
     }
   }
-}
-
-# Se usa para la subred de la puerta de enlace para la VPN
-resource "azurerm_subnet" "gateway_subnet" {
-  name                 = "GatewaySubnet"  # Nombre debe ser exacto
-  resource_group_name  = var.resource_group_name
-  virtual_network_name = azurerm_virtual_network.vnet.name
-  address_prefixes     = ["10.0.5.0/29"]  # Espacio de direcciones válido
 }

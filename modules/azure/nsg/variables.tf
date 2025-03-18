@@ -17,6 +17,11 @@ variable "vm_network_interface" {
   type        = string
 }
 
+variable "subnet_id_db" {
+  description = "ID de la subred a la que se conectará la base de datos"
+  type = string
+}
+
 variable "network_security_groups" {
   type = map(object({
     location            = string

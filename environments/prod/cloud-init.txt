@@ -1,0 +1,9 @@
+#cloud-config
+package_update: true
+packages:
+  - nginx
+  - curl
+runcmd:
+  - echo "¡Bienvenido a tu VM en Azure!" > /var/www/html/index.html
+  - systemctl enable nginx
+  - systemctl start nginx

@@ -89,7 +89,12 @@ variable "storage_container_name" {
   default = []
 }
 
-variable "vmcount" {
+variable "vm_public_count" {
+  description = "numero de VMs a desplegar"
+  type        = number
+}
+
+variable "vm_private_count" {
   description = "numero de VMs a desplegar"
   type        = number
 }

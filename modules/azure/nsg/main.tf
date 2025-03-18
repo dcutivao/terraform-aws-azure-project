@@ -22,13 +22,19 @@ resource "azurerm_network_security_group" "nsg" {
 }
 
 # Asociar SG a una Subnet
-resource "azurerm_subnet_network_security_group_association" "example" {
-  subnet_id                 = var.subnet_id_private[1]
+resource "azurerm_subnet_network_security_group_association" "sg-db-subnet" {
+  subnet_id                 = var.subnet_id_db
   network_security_group_id = azurerm_network_security_group.nsg["nsg-mysql"].id
 }
 
+resource "azurerm_subnet_network_security_group_association" "sg-interface-private" {
+  subnet_id                 = var.subnet_id_private[0]
+  network_security_group_id = azurerm_network_security_group.nsg["nsg-vm-private"].id
+}
+
+
 # Asociar SG a una inteface
-resource "azurerm_network_interface_security_group_association" "example" {
+resource "azurerm_network_interface_security_group_association" "sg-interface-public" {
   network_interface_id      = var.vm_network_interface
-  network_security_group_id = azurerm_network_security_group.nsg["nsg-vm"].id
+  network_security_group_id = azurerm_network_security_group.nsg["nsg-vm-public"].id
 }

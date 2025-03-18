@@ -5,12 +5,11 @@ resource "azurerm_mysql_flexible_server" "db-mysql" {
   administrator_login    = var.administrator_login
   administrator_password = var.administrator_password
   sku_name               = "B_Standard_B1s" # Plan más barato
-  #storage_mb            = 20480              #  20 GB (mínimo permitido)
   version                      = "8.0.21"
   backup_retention_days        = 7 # Reduce costos de backup
   geo_redundant_backup_enabled = false
   zone                         = "1"
-  delegated_subnet_id          = var.subnet_id_private[1] # Delegación de subred
+  delegated_subnet_id          = var.delegated_subnet_id # Delegación de subred
 
   storage {
     size_gb           = 20

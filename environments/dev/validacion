@@ -1,0 +1,1459 @@
+
+Terraform used the selected providers to generate the following execution
+plan. Resource actions are indicated with the following symbols:
+  [32m+[0m create[0m
+
+Terraform will perform the following actions:
+
+[1m  # module.ec2.aws_instance.ec2["db-server"][0m will be created
+[0m  [32m+[0m[0m resource "aws_instance" "ec2" {
+      [32m+[0m[0m ami                                  = "ami-04b4f1a9cf54c11d0"
+      [32m+[0m[0m arn                                  = (known after apply)
+      [32m+[0m[0m associate_public_ip_address          = (known after apply)
+      [32m+[0m[0m availability_zone                    = (known after apply)
+      [32m+[0m[0m cpu_core_count                       = (known after apply)
+      [32m+[0m[0m cpu_threads_per_core                 = (known after apply)
+      [32m+[0m[0m disable_api_stop                     = (known after apply)
+      [32m+[0m[0m disable_api_termination              = (known after apply)
+      [32m+[0m[0m ebs_optimized                        = (known after apply)
+      [32m+[0m[0m enable_primary_ipv6                  = (known after apply)
+      [32m+[0m[0m get_password_data                    = false
+      [32m+[0m[0m host_id                              = (known after apply)
+      [32m+[0m[0m host_resource_group_arn              = (known after apply)
+      [32m+[0m[0m iam_instance_profile                 = "EC2Role-instance-profile"
+      [32m+[0m[0m id                                   = (known after apply)
+      [32m+[0m[0m instance_initiated_shutdown_behavior = (known after apply)
+      [32m+[0m[0m instance_lifecycle                   = (known after apply)
+      [32m+[0m[0m instance_state                       = (known after apply)
+      [32m+[0m[0m instance_type                        = "t2.micro"
+      [32m+[0m[0m ipv6_address_count                   = (known after apply)
+      [32m+[0m[0m ipv6_addresses                       = (known after apply)
+      [32m+[0m[0m key_name                             = "aws-key-dev"
+      [32m+[0m[0m monitoring                           = (known after apply)
+      [32m+[0m[0m outpost_arn                          = (known after apply)
+      [32m+[0m[0m password_data                        = (known after apply)
+      [32m+[0m[0m placement_group                      = (known after apply)
+      [32m+[0m[0m placement_partition_number           = (known after apply)
+      [32m+[0m[0m primary_network_interface_id         = (known after apply)
+      [32m+[0m[0m private_dns                          = (known after apply)
+      [32m+[0m[0m private_ip                           = (known after apply)
+      [32m+[0m[0m public_dns                           = (known after apply)
+      [32m+[0m[0m public_ip                            = (known after apply)
+      [32m+[0m[0m secondary_private_ips                = (known after apply)
+      [32m+[0m[0m security_groups                      = (known after apply)
+      [32m+[0m[0m source_dest_check                    = true
+      [32m+[0m[0m spot_instance_request_id             = (known after apply)
+      [32m+[0m[0m subnet_id                            = (known after apply)
+      [32m+[0m[0m tags                                 = {
+          [32m+[0m[0m "Terraform"   = "true"
+          [32m+[0m[0m "environment" = "dev"
+        }
+      [32m+[0m[0m tags_all                             = {
+          [32m+[0m[0m "Terraform"   = "true"
+          [32m+[0m[0m "environment" = "dev"
+        }
+      [32m+[0m[0m tenancy                              = (known after apply)
+      [32m+[0m[0m user_data                            = (known after apply)
+      [32m+[0m[0m user_data_base64                     = (known after apply)
+      [32m+[0m[0m user_data_replace_on_change          = false
+      [32m+[0m[0m vpc_security_group_ids               = (known after apply)
+
+      [32m+[0m[0m capacity_reservation_specification (known after apply)
+
+      [32m+[0m[0m cpu_options (known after apply)
+
+      [32m+[0m[0m ebs_block_device (known after apply)
+
+      [32m+[0m[0m enclave_options (known after apply)
+
+      [32m+[0m[0m ephemeral_block_device (known after apply)
+
+      [32m+[0m[0m instance_market_options (known after apply)
+
+      [32m+[0m[0m maintenance_options (known after apply)
+
+      [32m+[0m[0m metadata_options (known after apply)
+
+      [32m+[0m[0m network_interface (known after apply)
+
+      [32m+[0m[0m private_dns_name_options (known after apply)
+
+      [32m+[0m[0m root_block_device (known after apply)
+    }
+
+[1m  # module.ec2.aws_instance.ec2["web-server"][0m will be created
+[0m  [32m+[0m[0m resource "aws_instance" "ec2" {
+      [32m+[0m[0m ami                                  = "ami-085ad6ae776d8f09c"
+      [32m+[0m[0m arn                                  = (known after apply)
+      [32m+[0m[0m associate_public_ip_address          = (known after apply)
+      [32m+[0m[0m availability_zone                    = (known after apply)
+      [32m+[0m[0m cpu_core_count                       = (known after apply)
+      [32m+[0m[0m cpu_threads_per_core                 = (known after apply)
+      [32m+[0m[0m disable_api_stop                     = (known after apply)
+      [32m+[0m[0m disable_api_termination              = (known after apply)
+      [32m+[0m[0m ebs_optimized                        = (known after apply)
+      [32m+[0m[0m enable_primary_ipv6                  = (known after apply)
+      [32m+[0m[0m get_password_data                    = false
+      [32m+[0m[0m host_id                              = (known after apply)
+      [32m+[0m[0m host_resource_group_arn              = (known after apply)
+      [32m+[0m[0m iam_instance_profile                 = "EC2Role-instance-profile"
+      [32m+[0m[0m id                                   = (known after apply)
+      [32m+[0m[0m instance_initiated_shutdown_behavior = (known after apply)
+      [32m+[0m[0m instance_lifecycle                   = (known after apply)
+      [32m+[0m[0m instance_state                       = (known after apply)
+      [32m+[0m[0m instance_type                        = "t2.micro"
+      [32m+[0m[0m ipv6_address_count                   = (known after apply)
+      [32m+[0m[0m ipv6_addresses                       = (known after apply)
+      [32m+[0m[0m key_name                             = "aws-key-dev"
+      [32m+[0m[0m monitoring                           = (known after apply)
+      [32m+[0m[0m outpost_arn                          = (known after apply)
+      [32m+[0m[0m password_data                        = (known after apply)
+      [32m+[0m[0m placement_group                      = (known after apply)
+      [32m+[0m[0m placement_partition_number           = (known after apply)
+      [32m+[0m[0m primary_network_interface_id         = (known after apply)
+      [32m+[0m[0m private_dns                          = (known after apply)
+      [32m+[0m[0m private_ip                           = (known after apply)
+      [32m+[0m[0m public_dns                           = (known after apply)
+      [32m+[0m[0m public_ip                            = (known after apply)
+      [32m+[0m[0m secondary_private_ips                = (known after apply)
+      [32m+[0m[0m security_groups                      = (known after apply)
+      [32m+[0m[0m source_dest_check                    = true
+      [32m+[0m[0m spot_instance_request_id             = (known after apply)
+      [32m+[0m[0m subnet_id                            = (known after apply)
+      [32m+[0m[0m tags                                 = {
+          [32m+[0m[0m "Terraform"   = "true"
+          [32m+[0m[0m "environment" = "dev"
+        }
+      [32m+[0m[0m tags_all                             = {
+          [32m+[0m[0m "Terraform"   = "true"
+          [32m+[0m[0m "environment" = "dev"
+        }
+      [32m+[0m[0m tenancy                              = (known after apply)
+      [32m+[0m[0m user_data                            = (known after apply)
+      [32m+[0m[0m user_data_base64                     = (known after apply)
+      [32m+[0m[0m user_data_replace_on_change          = false
+      [32m+[0m[0m vpc_security_group_ids               = (known after apply)
+
+      [32m+[0m[0m capacity_reservation_specification (known after apply)
+
+      [32m+[0m[0m cpu_options (known after apply)
+
+      [32m+[0m[0m ebs_block_device (known after apply)
+
+      [32m+[0m[0m enclave_options (known after apply)
+
+      [32m+[0m[0m ephemeral_block_device (known after apply)
+
+      [32m+[0m[0m instance_market_options (known after apply)
+
+      [32m+[0m[0m maintenance_options (known after apply)
+
+      [32m+[0m[0m metadata_options (known after apply)
+
+      [32m+[0m[0m network_interface (known after apply)
+
+      [32m+[0m[0m private_dns_name_options (known after apply)
+
+      [32m+[0m[0m root_block_device (known after apply)
+    }
+
+[1m  # module.iam.aws_iam_instance_profile.instance_profiles["EC2Role"][0m will be created
+[0m  [32m+[0m[0m resource "aws_iam_instance_profile" "instance_profiles" {
+      [32m+[0m[0m arn         = (known after apply)
+      [32m+[0m[0m create_date = (known after apply)
+      [32m+[0m[0m id          = (known after apply)
+      [32m+[0m[0m name        = "EC2Role-instance-profile"
+      [32m+[0m[0m name_prefix = (known after apply)
+      [32m+[0m[0m path        = "/"
+      [32m+[0m[0m role        = "EC2Role"
+      [32m+[0m[0m tags_all    = (known after apply)
+      [32m+[0m[0m unique_id   = (known after apply)
+    }
+
+[1m  # module.iam.aws_iam_policy.policies["EC2Role"][0m will be created
+[0m  [32m+[0m[0m resource "aws_iam_policy" "policies" {
+      [32m+[0m[0m arn              = (known after apply)
+      [32m+[0m[0m attachment_count = (known after apply)
+      [32m+[0m[0m id               = (known after apply)
+      [32m+[0m[0m name             = "EC2Role-policy"
+      [32m+[0m[0m name_prefix      = (known after apply)
+      [32m+[0m[0m path             = "/"
+      [32m+[0m[0m policy           = (known after apply)
+      [32m+[0m[0m policy_id        = (known after apply)
+      [32m+[0m[0m tags_all         = (known after apply)
+    }
+
+[1m  # module.iam.aws_iam_role.roles["EC2Role"][0m will be created
+[0m  [32m+[0m[0m resource "aws_iam_role" "roles" {
+      [32m+[0m[0m arn                   = (known after apply)
+      [32m+[0m[0m assume_role_policy    = jsonencode(
+            {
+              [32m+[0m[0m Statement = [
+                  [32m+[0m[0m {
+                      [32m+[0m[0m Action    = "sts:AssumeRole"
+                      [32m+[0m[0m Effect    = "Allow"
+                      [32m+[0m[0m Principal = {
+                          [32m+[0m[0m Service = "ec2.amazonaws.com"
+                        }
+                    },
+                ]
+              [32m+[0m[0m Version   = "2012-10-17"
+            }
+        )
+      [32m+[0m[0m create_date           = (known after apply)
+      [32m+[0m[0m force_detach_policies = false
+      [32m+[0m[0m id                    = (known after apply)
+      [32m+[0m[0m managed_policy_arns   = (known after apply)
+      [32m+[0m[0m max_session_duration  = 3600
+      [32m+[0m[0m name                  = "EC2Role"
+      [32m+[0m[0m name_prefix           = (known after apply)
+      [32m+[0m[0m path                  = "/"
+      [32m+[0m[0m tags_all              = (known after apply)
+      [32m+[0m[0m unique_id             = (known after apply)
+
+      [32m+[0m[0m inline_policy (known after apply)
+    }
+
+[1m  # module.iam.aws_iam_role_policy_attachment.attachments["EC2Role"][0m will be created
+[0m  [32m+[0m[0m resource "aws_iam_role_policy_attachment" "attachments" {
+      [32m+[0m[0m id         = (known after apply)
+      [32m+[0m[0m policy_arn = (known after apply)
+      [32m+[0m[0m role       = "EC2Role"
+    }
+
+[1m  # module.ip_publis.azurerm_public_ip.ip[0][0m will be created
+[0m  [32m+[0m[0m resource "azurerm_public_ip" "ip" {
+      [32m+[0m[0m allocation_method       = "Dynamic"
+      [32m+[0m[0m ddos_protection_mode    = "VirtualNetworkInherited"
+      [32m+[0m[0m fqdn                    = (known after apply)
+      [32m+[0m[0m id                      = (known after apply)
+      [32m+[0m[0m idle_timeout_in_minutes = 4
+      [32m+[0m[0m ip_address              = (known after apply)
+      [32m+[0m[0m ip_version              = "IPv4"
+      [32m+[0m[0m location                = "eastus"
+      [32m+[0m[0m name                    = "ip-publica-0"
+      [32m+[0m[0m resource_group_name     = "Grupo-de-recursos-Azure-dev"
+      [32m+[0m[0m sku                     = "Basic"
+      [32m+[0m[0m sku_tier                = "Regional"
+      [32m+[0m[0m tags                    = {
+          [32m+[0m[0m "environment" = "entorno-dev"
+          [32m+[0m[0m "owner"       = "Armando"
+        }
+    }
+
+[1m  # module.ip_publis.azurerm_public_ip.ip-vpn[0m will be created
+[0m  [32m+[0m[0m resource "azurerm_public_ip" "ip-vpn" {
+      [32m+[0m[0m allocation_method       = "Dynamic"
+      [32m+[0m[0m ddos_protection_mode    = "VirtualNetworkInherited"
+      [32m+[0m[0m fqdn                    = (known after apply)
+      [32m+[0m[0m id                      = (known after apply)
+      [32m+[0m[0m idle_timeout_in_minutes = 4
+      [32m+[0m[0m ip_address              = (known after apply)
+      [32m+[0m[0m ip_version              = "IPv4"
+      [32m+[0m[0m location                = "eastus"
+      [32m+[0m[0m name                    = "ip-public-vpn-dev"
+      [32m+[0m[0m resource_group_name     = "Grupo-de-recursos-Azure-dev"
+      [32m+[0m[0m sku                     = "Basic"
+      [32m+[0m[0m sku_tier                = "Regional"
+      [32m+[0m[0m tags                    = {
+          [32m+[0m[0m "environment" = "entorno-dev"
+          [32m+[0m[0m "owner"       = "Armando"
+        }
+    }
+
+[1m  # module.keys.aws_key_pair.generated[0m will be created
+[0m  [32m+[0m[0m resource "aws_key_pair" "generated" {
+      [32m+[0m[0m arn             = (known after apply)
+      [32m+[0m[0m fingerprint     = (known after apply)
+      [32m+[0m[0m id              = (known after apply)
+      [32m+[0m[0m key_name        = "aws-key-dev"
+      [32m+[0m[0m key_name_prefix = (known after apply)
+      [32m+[0m[0m key_pair_id     = (known after apply)
+      [32m+[0m[0m key_type        = (known after apply)
+      [32m+[0m[0m public_key      = (known after apply)
+      [32m+[0m[0m tags_all        = (known after apply)
+    }
+
+[1m  # module.keys.local_file.private_key_pem[0m will be created
+[0m  [32m+[0m[0m resource "local_file" "private_key_pem" {
+      [32m+[0m[0m content              = (sensitive value)
+      [32m+[0m[0m content_base64sha256 = (known after apply)
+      [32m+[0m[0m content_base64sha512 = (known after apply)
+      [32m+[0m[0m content_md5          = (known after apply)
+      [32m+[0m[0m content_sha1         = (known after apply)
+      [32m+[0m[0m content_sha256       = (known after apply)
+      [32m+[0m[0m content_sha512       = (known after apply)
+      [32m+[0m[0m directory_permission = "0777"
+      [32m+[0m[0m file_permission      = "0400"
+      [32m+[0m[0m filename             = "./_keys/aws-key-dev.pem"
+      [32m+[0m[0m id                   = (known after apply)
+    }
+
+[1m  # module.keys.local_file.public_key_pub[0m will be created
+[0m  [32m+[0m[0m resource "local_file" "public_key_pub" {
+      [32m+[0m[0m content              = (known after apply)
+      [32m+[0m[0m content_base64sha256 = (known after apply)
+      [32m+[0m[0m content_base64sha512 = (known after apply)
+      [32m+[0m[0m content_md5          = (known after apply)
+      [32m+[0m[0m content_sha1         = (known after apply)
+      [32m+[0m[0m content_sha256       = (known after apply)
+      [32m+[0m[0m content_sha512       = (known after apply)
+      [32m+[0m[0m directory_permission = "0777"
+      [32m+[0m[0m file_permission      = "0400"
+      [32m+[0m[0m filename             = "./_keys/aws-key-dev.pub"
+      [32m+[0m[0m id                   = (known after apply)
+    }
+
+[1m  # module.keys.tls_private_key.generated[0m will be created
+[0m  [32m+[0m[0m resource "tls_private_key" "generated" {
+      [32m+[0m[0m algorithm                     = "RSA"
+      [32m+[0m[0m ecdsa_curve                   = "P224"
+      [32m+[0m[0m id                            = (known after apply)
+      [32m+[0m[0m private_key_openssh           = (sensitive value)
+      [32m+[0m[0m private_key_pem               = (sensitive value)
+      [32m+[0m[0m private_key_pem_pkcs8         = (sensitive value)
+      [32m+[0m[0m public_key_fingerprint_md5    = (known after apply)
+      [32m+[0m[0m public_key_fingerprint_sha256 = (known after apply)
+      [32m+[0m[0m public_key_openssh            = (known after apply)
+      [32m+[0m[0m public_key_pem                = (known after apply)
+      [32m+[0m[0m rsa_bits                      = 2048
+    }
+
+[1m  # module.nsg.azurerm_network_interface_security_group_association.sg-interface-public[0m will be created
+[0m  [32m+[0m[0m resource "azurerm_network_interface_security_group_association" "sg-interface-public" {
+      [32m+[0m[0m id                        = (known after apply)
+      [32m+[0m[0m network_interface_id      = (known after apply)
+      [32m+[0m[0m network_security_group_id = (known after apply)
+    }
+
+[1m  # module.nsg.azurerm_network_security_group.nsg["nsg-mysql"][0m will be created
+[0m  [32m+[0m[0m resource "azurerm_network_security_group" "nsg" {
+      [32m+[0m[0m id                  = (known after apply)
+      [32m+[0m[0m location            = "eastus"
+      [32m+[0m[0m name                = "nsg-mysql"
+      [32m+[0m[0m resource_group_name = "Grupo-de-recursos-Azure-dev"
+      [32m+[0m[0m security_rule       = [
+          [32m+[0m[0m {
+              [32m+[0m[0m access                                     = "Allow"
+              [32m+[0m[0m destination_address_prefix                 = "*"
+              [32m+[0m[0m destination_address_prefixes               = []
+              [32m+[0m[0m destination_application_security_group_ids = []
+              [32m+[0m[0m destination_port_range                     = "3306"
+              [32m+[0m[0m destination_port_ranges                    = []
+              [32m+[0m[0m direction                                  = "Inbound"
+              [32m+[0m[0m name                                       = "AllowRDP"
+              [32m+[0m[0m priority                                   = 100
+              [32m+[0m[0m protocol                                   = "Tcp"
+              [32m+[0m[0m source_address_prefix                      = "*"
+              [32m+[0m[0m source_address_prefixes                    = []
+              [32m+[0m[0m source_application_security_group_ids      = []
+              [32m+[0m[0m source_port_range                          = "*"
+              [32m+[0m[0m source_port_ranges                         = []
+                [90m# (1 unchanged attribute hidden)[0m[0m
+            },
+        ]
+    }
+
+[1m  # module.nsg.azurerm_network_security_group.nsg["nsg-vm-private"][0m will be created
+[0m  [32m+[0m[0m resource "azurerm_network_security_group" "nsg" {
+      [32m+[0m[0m id                  = (known after apply)
+      [32m+[0m[0m location            = "eastus"
+      [32m+[0m[0m name                = "nsg-vm-private"
+      [32m+[0m[0m resource_group_name = "Grupo-de-recursos-Azure-dev"
+      [32m+[0m[0m security_rule       = [
+          [32m+[0m[0m {
+              [32m+[0m[0m access                                     = "Allow"
+              [32m+[0m[0m destination_address_prefix                 = "*"
+              [32m+[0m[0m destination_address_prefixes               = []
+              [32m+[0m[0m destination_application_security_group_ids = []
+              [32m+[0m[0m destination_port_range                     = "*"
+              [32m+[0m[0m destination_port_ranges                    = []
+              [32m+[0m[0m direction                                  = "Inbound"
+              [32m+[0m[0m name                                       = "AlloICMP"
+              [32m+[0m[0m priority                                   = 101
+              [32m+[0m[0m protocol                                   = "Icmp"
+              [32m+[0m[0m source_address_prefix                      = "*"
+              [32m+[0m[0m source_address_prefixes                    = []
+              [32m+[0m[0m source_application_security_group_ids      = []
+              [32m+[0m[0m source_port_range                          = "*"
+              [32m+[0m[0m source_port_ranges                         = []
+                [90m# (1 unchanged attribute hidden)[0m[0m
+            },
+          [32m+[0m[0m {
+              [32m+[0m[0m access                                     = "Allow"
+              [32m+[0m[0m destination_address_prefix                 = "*"
+              [32m+[0m[0m destination_address_prefixes               = []
+              [32m+[0m[0m destination_application_security_group_ids = []
+              [32m+[0m[0m destination_port_range                     = "22"
+              [32m+[0m[0m destination_port_ranges                    = []
+              [32m+[0m[0m direction                                  = "Inbound"
+              [32m+[0m[0m name                                       = "AllowSSH"
+              [32m+[0m[0m priority                                   = 100
+              [32m+[0m[0m protocol                                   = "Tcp"
+              [32m+[0m[0m source_address_prefix                      = "*"
+              [32m+[0m[0m source_address_prefixes                    = []
+              [32m+[0m[0m source_application_security_group_ids      = []
+              [32m+[0m[0m source_port_range                          = "*"
+              [32m+[0m[0m source_port_ranges                         = []
+                [90m# (1 unchanged attribute hidden)[0m[0m
+            },
+        ]
+    }
+
+[1m  # module.nsg.azurerm_network_security_group.nsg["nsg-vm-public"][0m will be created
+[0m  [32m+[0m[0m resource "azurerm_network_security_group" "nsg" {
+      [32m+[0m[0m id                  = (known after apply)
+      [32m+[0m[0m location            = "eastus"
+      [32m+[0m[0m name                = "nsg-vm-public"
+      [32m+[0m[0m resource_group_name = "Grupo-de-recursos-Azure-dev"
+      [32m+[0m[0m security_rule       = [
+          [32m+[0m[0m {
+              [32m+[0m[0m access                                     = "Allow"
+              [32m+[0m[0m destination_address_prefix                 = "*"
+              [32m+[0m[0m destination_address_prefixes               = []
+              [32m+[0m[0m destination_application_security_group_ids = []
+              [32m+[0m[0m destination_port_range                     = "22"
+              [32m+[0m[0m destination_port_ranges                    = []
+              [32m+[0m[0m direction                                  = "Inbound"
+              [32m+[0m[0m name                                       = "AllowSSH"
+              [32m+[0m[0m priority                                   = 100
+              [32m+[0m[0m protocol                                   = "Tcp"
+              [32m+[0m[0m source_address_prefix                      = "*"
+              [32m+[0m[0m source_address_prefixes                    = []
+              [32m+[0m[0m source_application_security_group_ids      = []
+              [32m+[0m[0m source_port_range                          = "*"
+              [32m+[0m[0m source_port_ranges                         = []
+                [90m# (1 unchanged attribute hidden)[0m[0m
+            },
+          [32m+[0m[0m {
+              [32m+[0m[0m access                                     = "Allow"
+              [32m+[0m[0m destination_address_prefix                 = "*"
+              [32m+[0m[0m destination_address_prefixes               = []
+              [32m+[0m[0m destination_application_security_group_ids = []
+              [32m+[0m[0m destination_port_range                     = "80"
+              [32m+[0m[0m destination_port_ranges                    = []
+              [32m+[0m[0m direction                                  = "Inbound"
+              [32m+[0m[0m name                                       = "AllowHTTP"
+              [32m+[0m[0m priority                                   = 200
+              [32m+[0m[0m protocol                                   = "Tcp"
+              [32m+[0m[0m source_address_prefix                      = "*"
+              [32m+[0m[0m source_address_prefixes                    = []
+              [32m+[0m[0m source_application_security_group_ids      = []
+              [32m+[0m[0m source_port_range                          = "*"
+              [32m+[0m[0m source_port_ranges                         = []
+                [90m# (1 unchanged attribute hidden)[0m[0m
+            },
+        ]
+    }
+
+[1m  # module.nsg.azurerm_subnet_network_security_group_association.sg-db-subnet[0m will be created
+[0m  [32m+[0m[0m resource "azurerm_subnet_network_security_group_association" "sg-db-subnet" {
+      [32m+[0m[0m id                        = (known after apply)
+      [32m+[0m[0m network_security_group_id = (known after apply)
+      [32m+[0m[0m subnet_id                 = (known after apply)
+    }
+
+[1m  # module.nsg.azurerm_subnet_network_security_group_association.sg-interface-private[0m will be created
+[0m  [32m+[0m[0m resource "azurerm_subnet_network_security_group_association" "sg-interface-private" {
+      [32m+[0m[0m id                        = (known after apply)
+      [32m+[0m[0m network_security_group_id = (known after apply)
+      [32m+[0m[0m subnet_id                 = (known after apply)
+    }
+
+[1m  # module.resource_group.azurerm_resource_group.rg[0m will be created
+[0m  [32m+[0m[0m resource "azurerm_resource_group" "rg" {
+      [32m+[0m[0m id       = (known after apply)
+      [32m+[0m[0m location = "eastus"
+      [32m+[0m[0m name     = "Grupo-de-recursos-Azure-dev"
+      [32m+[0m[0m tags     = {
+          [32m+[0m[0m "environment" = "entorno-dev"
+          [32m+[0m[0m "owner"       = "Armando"
+        }
+    }
+
+[1m  # module.s3_bucket.aws_s3_bucket.this[0m will be created
+[0m  [32m+[0m[0m resource "aws_s3_bucket" "this" {
+      [32m+[0m[0m acceleration_status         = (known after apply)
+      [32m+[0m[0m acl                         = (known after apply)
+      [32m+[0m[0m arn                         = (known after apply)
+      [32m+[0m[0m bucket                      = "bucket-daco-environment-dev"
+      [32m+[0m[0m bucket_domain_name          = (known after apply)
+      [32m+[0m[0m bucket_prefix               = (known after apply)
+      [32m+[0m[0m bucket_regional_domain_name = (known after apply)
+      [32m+[0m[0m force_destroy               = false
+      [32m+[0m[0m hosted_zone_id              = (known after apply)
+      [32m+[0m[0m id                          = (known after apply)
+      [32m+[0m[0m object_lock_enabled         = (known after apply)
+      [32m+[0m[0m policy                      = (known after apply)
+      [32m+[0m[0m region                      = (known after apply)
+      [32m+[0m[0m request_payer               = (known after apply)
+      [32m+[0m[0m tags                        = {
+          [32m+[0m[0m "Terraform"   = "true"
+          [32m+[0m[0m "environment" = "dev"
+        }
+      [32m+[0m[0m tags_all                    = {
+          [32m+[0m[0m "Terraform"   = "true"
+          [32m+[0m[0m "environment" = "dev"
+        }
+      [32m+[0m[0m website_domain              = (known after apply)
+      [32m+[0m[0m website_endpoint            = (known after apply)
+
+      [32m+[0m[0m cors_rule (known after apply)
+
+      [32m+[0m[0m grant (known after apply)
+
+      [32m+[0m[0m lifecycle_rule (known after apply)
+
+      [32m+[0m[0m logging (known after apply)
+
+      [32m+[0m[0m object_lock_configuration (known after apply)
+
+      [32m+[0m[0m replication_configuration (known after apply)
+
+      [32m+[0m[0m server_side_encryption_configuration (known after apply)
+
+      [32m+[0m[0m versioning (known after apply)
+
+      [32m+[0m[0m website (known after apply)
+    }
+
+[1m  # module.s3_bucket.aws_s3_bucket_ownership_controls.bucket_dueno_objetos[0m will be created
+[0m  [32m+[0m[0m resource "aws_s3_bucket_ownership_controls" "bucket_dueno_objetos" {
+      [32m+[0m[0m bucket = (known after apply)
+      [32m+[0m[0m id     = (known after apply)
+
+      [32m+[0m[0m rule {
+          [32m+[0m[0m object_ownership = "BucketOwnerEnforced"
+        }
+    }
+
+[1m  # module.s3_bucket.aws_s3_bucket_public_access_block.negation_access_public[0m will be created
+[0m  [32m+[0m[0m resource "aws_s3_bucket_public_access_block" "negation_access_public" {
+      [32m+[0m[0m block_public_acls       = true
+      [32m+[0m[0m block_public_policy     = true
+      [32m+[0m[0m bucket                  = (known after apply)
+      [32m+[0m[0m id                      = (known after apply)
+      [32m+[0m[0m ignore_public_acls      = true
+      [32m+[0m[0m restrict_public_buckets = true
+    }
+
+[1m  # module.s3_bucket.aws_s3_bucket_server_side_encryption_configuration.bucket_encryption[0m will be created
+[0m  [32m+[0m[0m resource "aws_s3_bucket_server_side_encryption_configuration" "bucket_encryption" {
+      [32m+[0m[0m bucket = (known after apply)
+      [32m+[0m[0m id     = (known after apply)
+
+      [32m+[0m[0m rule {
+          [32m+[0m[0m apply_server_side_encryption_by_default {
+              [32m+[0m[0m sse_algorithm     = "AES256"
+                [90m# (1 unchanged attribute hidden)[0m[0m
+            }
+        }
+    }
+
+[1m  # module.s3_bucket.aws_s3_bucket_versioning.versioning_enables[0m will be created
+[0m  [32m+[0m[0m resource "aws_s3_bucket_versioning" "versioning_enables" {
+      [32m+[0m[0m bucket = (known after apply)
+      [32m+[0m[0m id     = (known after apply)
+
+      [32m+[0m[0m versioning_configuration {
+          [32m+[0m[0m mfa_delete = (known after apply)
+          [32m+[0m[0m status     = "Disabled"
+        }
+    }
+
+[1m  # module.security_groups.aws_security_group.sg["ec2-sg"][0m will be created
+[0m  [32m+[0m[0m resource "aws_security_group" "sg" {
+      [32m+[0m[0m arn                    = (known after apply)
+      [32m+[0m[0m description            = "Security Group para EC2"
+      [32m+[0m[0m egress                 = [
+          [32m+[0m[0m {
+              [32m+[0m[0m cidr_blocks      = [
+                  [32m+[0m[0m "0.0.0.0/0",
+                ]
+              [32m+[0m[0m from_port        = 0
+              [32m+[0m[0m ipv6_cidr_blocks = []
+              [32m+[0m[0m prefix_list_ids  = []
+              [32m+[0m[0m protocol         = "-1"
+              [32m+[0m[0m security_groups  = []
+              [32m+[0m[0m self             = false
+              [32m+[0m[0m to_port          = 0
+                [90m# (1 unchanged attribute hidden)[0m[0m
+            },
+        ]
+      [32m+[0m[0m id                     = (known after apply)
+      [32m+[0m[0m ingress                = [
+          [32m+[0m[0m {
+              [32m+[0m[0m cidr_blocks      = [
+                  [32m+[0m[0m "0.0.0.0/0",
+                ]
+              [32m+[0m[0m from_port        = -1
+              [32m+[0m[0m ipv6_cidr_blocks = []
+              [32m+[0m[0m prefix_list_ids  = []
+              [32m+[0m[0m protocol         = "icmp"
+              [32m+[0m[0m security_groups  = []
+              [32m+[0m[0m self             = false
+              [32m+[0m[0m to_port          = -1
+                [90m# (1 unchanged attribute hidden)[0m[0m
+            },
+          [32m+[0m[0m {
+              [32m+[0m[0m cidr_blocks      = [
+                  [32m+[0m[0m "0.0.0.0/0",
+                ]
+              [32m+[0m[0m from_port        = 22
+              [32m+[0m[0m ipv6_cidr_blocks = []
+              [32m+[0m[0m prefix_list_ids  = []
+              [32m+[0m[0m protocol         = "tcp"
+              [32m+[0m[0m security_groups  = []
+              [32m+[0m[0m self             = false
+              [32m+[0m[0m to_port          = 22
+                [90m# (1 unchanged attribute hidden)[0m[0m
+            },
+          [32m+[0m[0m {
+              [32m+[0m[0m cidr_blocks      = [
+                  [32m+[0m[0m "0.0.0.0/0",
+                ]
+              [32m+[0m[0m from_port        = 80
+              [32m+[0m[0m ipv6_cidr_blocks = []
+              [32m+[0m[0m prefix_list_ids  = []
+              [32m+[0m[0m protocol         = "tcp"
+              [32m+[0m[0m security_groups  = []
+              [32m+[0m[0m self             = false
+              [32m+[0m[0m to_port          = 80
+                [90m# (1 unchanged attribute hidden)[0m[0m
+            },
+        ]
+      [32m+[0m[0m name                   = "ec2-sg"
+      [32m+[0m[0m name_prefix            = (known after apply)
+      [32m+[0m[0m owner_id               = (known after apply)
+      [32m+[0m[0m revoke_rules_on_delete = false
+      [32m+[0m[0m tags_all               = (known after apply)
+      [32m+[0m[0m vpc_id                 = (known after apply)
+    }
+
+[1m  # module.security_groups.aws_security_group.sg["rds-sg"][0m will be created
+[0m  [32m+[0m[0m resource "aws_security_group" "sg" {
+      [32m+[0m[0m arn                    = (known after apply)
+      [32m+[0m[0m description            = "Security Group para RDS"
+      [32m+[0m[0m egress                 = [
+          [32m+[0m[0m {
+              [32m+[0m[0m cidr_blocks      = [
+                  [32m+[0m[0m "0.0.0.0/0",
+                ]
+              [32m+[0m[0m from_port        = 0
+              [32m+[0m[0m ipv6_cidr_blocks = []
+              [32m+[0m[0m prefix_list_ids  = []
+              [32m+[0m[0m protocol         = "-1"
+              [32m+[0m[0m security_groups  = []
+              [32m+[0m[0m self             = false
+              [32m+[0m[0m to_port          = 0
+                [90m# (1 unchanged attribute hidden)[0m[0m
+            },
+        ]
+      [32m+[0m[0m id                     = (known after apply)
+      [32m+[0m[0m ingress                = [
+          [32m+[0m[0m {
+              [32m+[0m[0m cidr_blocks      = [
+                  [32m+[0m[0m "172.16.3.0/24",
+                ]
+              [32m+[0m[0m from_port        = 3306
+              [32m+[0m[0m ipv6_cidr_blocks = []
+              [32m+[0m[0m prefix_list_ids  = []
+              [32m+[0m[0m protocol         = "tcp"
+              [32m+[0m[0m security_groups  = []
+              [32m+[0m[0m self             = false
+              [32m+[0m[0m to_port          = 3306
+                [90m# (1 unchanged attribute hidden)[0m[0m
+            },
+        ]
+      [32m+[0m[0m name                   = "rds-sg"
+      [32m+[0m[0m name_prefix            = (known after apply)
+      [32m+[0m[0m owner_id               = (known after apply)
+      [32m+[0m[0m revoke_rules_on_delete = false
+      [32m+[0m[0m tags_all               = (known after apply)
+      [32m+[0m[0m vpc_id                 = (known after apply)
+    }
+
+[1m  # module.storage_account.azurerm_storage_account.storage_account[0m will be created
+[0m  [32m+[0m[0m resource "azurerm_storage_account" "storage_account" {
+      [32m+[0m[0m access_tier                        = (known after apply)
+      [32m+[0m[0m account_kind                       = "StorageV2"
+      [32m+[0m[0m account_replication_type           = "LRS"
+      [32m+[0m[0m account_tier                       = "Standard"
+      [32m+[0m[0m allow_nested_items_to_be_public    = true
+      [32m+[0m[0m cross_tenant_replication_enabled   = false
+      [32m+[0m[0m default_to_oauth_authentication    = false
+      [32m+[0m[0m dns_endpoint_type                  = "Standard"
+      [32m+[0m[0m https_traffic_only_enabled         = true
+      [32m+[0m[0m id                                 = (known after apply)
+      [32m+[0m[0m infrastructure_encryption_enabled  = false
+      [32m+[0m[0m is_hns_enabled                     = false
+      [32m+[0m[0m large_file_share_enabled           = (known after apply)
+      [32m+[0m[0m local_user_enabled                 = true
+      [32m+[0m[0m location                           = "eastus"
+      [32m+[0m[0m min_tls_version                    = "TLS1_2"
+      [32m+[0m[0m name                               = (known after apply)
+      [32m+[0m[0m nfsv3_enabled                      = false
+      [32m+[0m[0m primary_access_key                 = (sensitive value)
+      [32m+[0m[0m primary_blob_connection_string     = (sensitive value)
+      [32m+[0m[0m primary_blob_endpoint              = (known after apply)
+      [32m+[0m[0m primary_blob_host                  = (known after apply)
+      [32m+[0m[0m primary_blob_internet_endpoint     = (known after apply)
+      [32m+[0m[0m primary_blob_internet_host         = (known after apply)
+      [32m+[0m[0m primary_blob_microsoft_endpoint    = (known after apply)
+      [32m+[0m[0m primary_blob_microsoft_host        = (known after apply)
+      [32m+[0m[0m primary_connection_string          = (sensitive value)
+      [32m+[0m[0m primary_dfs_endpoint               = (known after apply)
+      [32m+[0m[0m primary_dfs_host                   = (known after apply)
+      [32m+[0m[0m primary_dfs_internet_endpoint      = (known after apply)
+      [32m+[0m[0m primary_dfs_internet_host          = (known after apply)
+      [32m+[0m[0m primary_dfs_microsoft_endpoint     = (known after apply)
+      [32m+[0m[0m primary_dfs_microsoft_host         = (known after apply)
+      [32m+[0m[0m primary_file_endpoint              = (known after apply)
+      [32m+[0m[0m primary_file_host                  = (known after apply)
+      [32m+[0m[0m primary_file_internet_endpoint     = (known after apply)
+      [32m+[0m[0m primary_file_internet_host         = (known after apply)
+      [32m+[0m[0m primary_file_microsoft_endpoint    = (known after apply)
+      [32m+[0m[0m primary_file_microsoft_host        = (known after apply)
+      [32m+[0m[0m primary_location                   = (known after apply)
+      [32m+[0m[0m primary_queue_endpoint             = (known after apply)
+      [32m+[0m[0m primary_queue_host                 = (known after apply)
+      [32m+[0m[0m primary_queue_microsoft_endpoint   = (known after apply)
+      [32m+[0m[0m primary_queue_microsoft_host       = (known after apply)
+      [32m+[0m[0m primary_table_endpoint             = (known after apply)
+      [32m+[0m[0m primary_table_host                 = (known after apply)
+      [32m+[0m[0m primary_table_microsoft_endpoint   = (known after apply)
+      [32m+[0m[0m primary_table_microsoft_host       = (known after apply)
+      [32m+[0m[0m primary_web_endpoint               = (known after apply)
+      [32m+[0m[0m primary_web_host                   = (known after apply)
+      [32m+[0m[0m primary_web_internet_endpoint      = (known after apply)
+      [32m+[0m[0m primary_web_internet_host          = (known after apply)
+      [32m+[0m[0m primary_web_microsoft_endpoint     = (known after apply)
+      [32m+[0m[0m primary_web_microsoft_host         = (known after apply)
+      [32m+[0m[0m public_network_access_enabled      = true
+      [32m+[0m[0m queue_encryption_key_type          = "Service"
+      [32m+[0m[0m resource_group_name                = "Grupo-de-recursos-Azure-dev"
+      [32m+[0m[0m secondary_access_key               = (sensitive value)
+      [32m+[0m[0m secondary_blob_connection_string   = (sensitive value)
+      [32m+[0m[0m secondary_blob_endpoint            = (known after apply)
+      [32m+[0m[0m secondary_blob_host                = (known after apply)
+      [32m+[0m[0m secondary_blob_internet_endpoint   = (known after apply)
+      [32m+[0m[0m secondary_blob_internet_host       = (known after apply)
+      [32m+[0m[0m secondary_blob_microsoft_endpoint  = (known after apply)
+      [32m+[0m[0m secondary_blob_microsoft_host      = (known after apply)
+      [32m+[0m[0m secondary_connection_string        = (sensitive value)
+      [32m+[0m[0m secondary_dfs_endpoint             = (known after apply)
+      [32m+[0m[0m secondary_dfs_host                 = (known after apply)
+      [32m+[0m[0m secondary_dfs_internet_endpoint    = (known after apply)
+      [32m+[0m[0m secondary_dfs_internet_host        = (known after apply)
+      [32m+[0m[0m secondary_dfs_microsoft_endpoint   = (known after apply)
+      [32m+[0m[0m secondary_dfs_microsoft_host       = (known after apply)
+      [32m+[0m[0m secondary_file_endpoint            = (known after apply)
+      [32m+[0m[0m secondary_file_host                = (known after apply)
+      [32m+[0m[0m secondary_file_internet_endpoint   = (known after apply)
+      [32m+[0m[0m secondary_file_internet_host       = (known after apply)
+      [32m+[0m[0m secondary_file_microsoft_endpoint  = (known after apply)
+      [32m+[0m[0m secondary_file_microsoft_host      = (known after apply)
+      [32m+[0m[0m secondary_location                 = (known after apply)
+      [32m+[0m[0m secondary_queue_endpoint           = (known after apply)
+      [32m+[0m[0m secondary_queue_host               = (known after apply)
+      [32m+[0m[0m secondary_queue_microsoft_endpoint = (known after apply)
+      [32m+[0m[0m secondary_queue_microsoft_host     = (known after apply)
+      [32m+[0m[0m secondary_table_endpoint           = (known after apply)
+      [32m+[0m[0m secondary_table_host               = (known after apply)
+      [32m+[0m[0m secondary_table_microsoft_endpoint = (known after apply)
+      [32m+[0m[0m secondary_table_microsoft_host     = (known after apply)
+      [32m+[0m[0m secondary_web_endpoint             = (known after apply)
+      [32m+[0m[0m secondary_web_host                 = (known after apply)
+      [32m+[0m[0m secondary_web_internet_endpoint    = (known after apply)
+      [32m+[0m[0m secondary_web_internet_host        = (known after apply)
+      [32m+[0m[0m secondary_web_microsoft_endpoint   = (known after apply)
+      [32m+[0m[0m secondary_web_microsoft_host       = (known after apply)
+      [32m+[0m[0m sftp_enabled                       = false
+      [32m+[0m[0m shared_access_key_enabled          = true
+      [32m+[0m[0m table_encryption_key_type          = "Service"
+      [32m+[0m[0m tags                               = {
+          [32m+[0m[0m "environment" = "entorno-entorno-dev"
+          [32m+[0m[0m "owner"       = "Armando"
+        }
+
+      [32m+[0m[0m blob_properties (known after apply)
+
+      [32m+[0m[0m network_rules (known after apply)
+
+      [32m+[0m[0m queue_properties (known after apply)
+
+      [32m+[0m[0m routing (known after apply)
+
+      [32m+[0m[0m share_properties (known after apply)
+
+      [32m+[0m[0m static_website (known after apply)
+    }
+
+[1m  # module.storage_account.random_string.storageaccount-name[0m will be created
+[0m  [32m+[0m[0m resource "random_string" "storageaccount-name" {
+      [32m+[0m[0m id          = (known after apply)
+      [32m+[0m[0m length      = 16
+      [32m+[0m[0m lower       = true
+      [32m+[0m[0m min_lower   = 0
+      [32m+[0m[0m min_numeric = 0
+      [32m+[0m[0m min_special = 0
+      [32m+[0m[0m min_upper   = 0
+      [32m+[0m[0m number      = true
+      [32m+[0m[0m numeric     = true
+      [32m+[0m[0m result      = (known after apply)
+      [32m+[0m[0m special     = false
+      [32m+[0m[0m upper       = false
+    }
+
+[1m  # module.storage_container.azurerm_storage_container.container["diego"][0m will be created
+[0m  [32m+[0m[0m resource "azurerm_storage_container" "container" {
+      [32m+[0m[0m container_access_type             = "private"
+      [32m+[0m[0m default_encryption_scope          = (known after apply)
+      [32m+[0m[0m encryption_scope_override_enabled = true
+      [32m+[0m[0m has_immutability_policy           = (known after apply)
+      [32m+[0m[0m has_legal_hold                    = (known after apply)
+      [32m+[0m[0m id                                = (known after apply)
+      [32m+[0m[0m metadata                          = (known after apply)
+      [32m+[0m[0m name                              = "diego"
+      [32m+[0m[0m resource_manager_id               = (known after apply)
+      [32m+[0m[0m storage_account_id                = (known after apply)
+    }
+
+[1m  # module.storage_container.azurerm_storage_container.container["movements"][0m will be created
+[0m  [32m+[0m[0m resource "azurerm_storage_container" "container" {
+      [32m+[0m[0m container_access_type             = "private"
+      [32m+[0m[0m default_encryption_scope          = (known after apply)
+      [32m+[0m[0m encryption_scope_override_enabled = true
+      [32m+[0m[0m has_immutability_policy           = (known after apply)
+      [32m+[0m[0m has_legal_hold                    = (known after apply)
+      [32m+[0m[0m id                                = (known after apply)
+      [32m+[0m[0m metadata                          = (known after apply)
+      [32m+[0m[0m name                              = "movements"
+      [32m+[0m[0m resource_manager_id               = (known after apply)
+      [32m+[0m[0m storage_account_id                = (known after apply)
+    }
+
+[1m  # module.storage_container.azurerm_storage_container.container["storagelogs"][0m will be created
+[0m  [32m+[0m[0m resource "azurerm_storage_container" "container" {
+      [32m+[0m[0m container_access_type             = "private"
+      [32m+[0m[0m default_encryption_scope          = (known after apply)
+      [32m+[0m[0m encryption_scope_override_enabled = true
+      [32m+[0m[0m has_immutability_policy           = (known after apply)
+      [32m+[0m[0m has_legal_hold                    = (known after apply)
+      [32m+[0m[0m id                                = (known after apply)
+      [32m+[0m[0m metadata                          = (known after apply)
+      [32m+[0m[0m name                              = "storagelogs"
+      [32m+[0m[0m resource_manager_id               = (known after apply)
+      [32m+[0m[0m storage_account_id                = (known after apply)
+    }
+
+[1m  # module.vm.azurerm_linux_virtual_machine.vm_linux_private[0][0m will be created
+[0m  [32m+[0m[0m resource "azurerm_linux_virtual_machine" "vm_linux_private" {
+      [32m+[0m[0m admin_username                                         = "adminuser"
+      [32m+[0m[0m allow_extension_operations                             = true
+      [32m+[0m[0m bypass_platform_safety_checks_on_user_schedule_enabled = false
+      [32m+[0m[0m computer_name                                          = (known after apply)
+      [32m+[0m[0m disable_password_authentication                        = true
+      [32m+[0m[0m disk_controller_type                                   = (known after apply)
+      [32m+[0m[0m extensions_time_budget                                 = "PT1H30M"
+      [32m+[0m[0m id                                                     = (known after apply)
+      [32m+[0m[0m location                                               = "eastus"
+      [32m+[0m[0m max_bid_price                                          = -1
+      [32m+[0m[0m name                                                   = "vm-private-0"
+      [32m+[0m[0m network_interface_ids                                  = (known after apply)
+      [32m+[0m[0m patch_assessment_mode                                  = "ImageDefault"
+      [32m+[0m[0m patch_mode                                             = "ImageDefault"
+      [32m+[0m[0m platform_fault_domain                                  = -1
+      [32m+[0m[0m priority                                               = "Regular"
+      [32m+[0m[0m private_ip_address                                     = (known after apply)
+      [32m+[0m[0m private_ip_addresses                                   = (known after apply)
+      [32m+[0m[0m provision_vm_agent                                     = true
+      [32m+[0m[0m public_ip_address                                      = (known after apply)
+      [32m+[0m[0m public_ip_addresses                                    = (known after apply)
+      [32m+[0m[0m resource_group_name                                    = "Grupo-de-recursos-Azure-dev"
+      [32m+[0m[0m size                                                   = "Standard_DS1_v2"
+      [32m+[0m[0m tags                                                   = {
+          [32m+[0m[0m "environment" = "entorno-dev"
+          [32m+[0m[0m "owner"       = "Armando"
+        }
+      [32m+[0m[0m virtual_machine_id                                     = (known after apply)
+      [32m+[0m[0m vm_agent_platform_updates_enabled                      = false
+
+      [32m+[0m[0m admin_ssh_key {
+          [32m+[0m[0m public_key = <<-EOT
+                ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAACAQDelZKNVrBGqS8xtCgZsRhjF27C7TNYrTdSMGnGHhOQ/LP4gpwYNUq+1iStI5dzjj6xHhTHxs19jIm32+IhnCisbKI+c5J5+YGpzKzQjc/OaMOdkTGoUmd2MA1ONYjHv5y3xKePT0j3cjlWTw+BiLVazVjvpuVouf0pzq9jpPLBwlQGVJa26nhK2EKYYqjqDvpWkEsv9Q8SixQ9pA42X5SzEHDcm4vZZ8zWzmRQH53iJdkOlnG5/7JZZhLxcguMFXj30AYkI7SaRRdXANYyw5kh2EKKIPlZKRksD6JpE1Xtu1TbOl9sj6wkwU7F1d/4wsMI7Qn6ALMdbraJd3bcDGfwJJt9r2ww83KSSCJPlFSYjAEYxhHMnIvT6cDHDhf/iFPYk2+G3HssBMJB+4O+TDbycaQ9DHDk0uY6TiEktiGRWKiwkpgU253uPDpo5KEpQohoNjmdM6uoUWBAwCR4WtqtX7U9VAoAQliUflcGQLIR6P8pGxTTuWh7VVTl1OsGEidjyJROly6GxUShH7uYlpjzG0FTqwR4WjHZRpKyuXROlE+SrmJLFIfF4tJG19UQscIE0zvXOq9GFQOvFpmIOjwMtzrIQ8TjPTrD0NmefcIIYtZHgLBt+sa+EEoPQBKcgJDThxnVOUotIUM6mrlE5ZakcOUqjusfN2iYVL8p++b4nw== dcutivao@gmail.com
+            EOT
+          [32m+[0m[0m username   = "adminuser"
+        }
+
+      [32m+[0m[0m boot_diagnostics {
+          [32m+[0m[0m storage_account_uri = (known after apply)
+        }
+
+      [32m+[0m[0m os_disk {
+          [32m+[0m[0m caching                   = "ReadWrite"
+          [32m+[0m[0m disk_size_gb              = (known after apply)
+          [32m+[0m[0m id                        = (known after apply)
+          [32m+[0m[0m name                      = "myosdisk-private-0"
+          [32m+[0m[0m storage_account_type      = "Standard_LRS"
+          [32m+[0m[0m write_accelerator_enabled = false
+        }
+
+      [32m+[0m[0m source_image_reference {
+          [32m+[0m[0m offer     = "UbuntuServer"
+          [32m+[0m[0m publisher = "Canonical"
+          [32m+[0m[0m sku       = "16.04-LTS"
+          [32m+[0m[0m version   = "latest"
+        }
+
+      [32m+[0m[0m termination_notification (known after apply)
+    }
+
+[1m  # module.vm.azurerm_linux_virtual_machine.vm_linux_public[0][0m will be created
+[0m  [32m+[0m[0m resource "azurerm_linux_virtual_machine" "vm_linux_public" {
+      [32m+[0m[0m admin_username                                         = "adminuser"
+      [32m+[0m[0m allow_extension_operations                             = true
+      [32m+[0m[0m bypass_platform_safety_checks_on_user_schedule_enabled = false
+      [32m+[0m[0m computer_name                                          = (known after apply)
+      [32m+[0m[0m custom_data                                            = (sensitive value)
+      [32m+[0m[0m disable_password_authentication                        = true
+      [32m+[0m[0m disk_controller_type                                   = (known after apply)
+      [32m+[0m[0m extensions_time_budget                                 = "PT1H30M"
+      [32m+[0m[0m id                                                     = (known after apply)
+      [32m+[0m[0m location                                               = "eastus"
+      [32m+[0m[0m max_bid_price                                          = -1
+      [32m+[0m[0m name                                                   = "vm-public-0"
+      [32m+[0m[0m network_interface_ids                                  = (known after apply)
+      [32m+[0m[0m patch_assessment_mode                                  = "ImageDefault"
+      [32m+[0m[0m patch_mode                                             = "ImageDefault"
+      [32m+[0m[0m platform_fault_domain                                  = -1
+      [32m+[0m[0m priority                                               = "Regular"
+      [32m+[0m[0m private_ip_address                                     = (known after apply)
+      [32m+[0m[0m private_ip_addresses                                   = (known after apply)
+      [32m+[0m[0m provision_vm_agent                                     = true
+      [32m+[0m[0m public_ip_address                                      = (known after apply)
+      [32m+[0m[0m public_ip_addresses                                    = (known after apply)
+      [32m+[0m[0m resource_group_name                                    = "Grupo-de-recursos-Azure-dev"
+      [32m+[0m[0m size                                                   = "Standard_DS1_v2"
+      [32m+[0m[0m tags                                                   = {
+          [32m+[0m[0m "environment" = "entorno-dev"
+          [32m+[0m[0m "owner"       = "Armando"
+        }
+      [32m+[0m[0m virtual_machine_id                                     = (known after apply)
+      [32m+[0m[0m vm_agent_platform_updates_enabled                      = false
+
+      [32m+[0m[0m admin_ssh_key {
+          [32m+[0m[0m public_key = <<-EOT
+                ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAACAQDelZKNVrBGqS8xtCgZsRhjF27C7TNYrTdSMGnGHhOQ/LP4gpwYNUq+1iStI5dzjj6xHhTHxs19jIm32+IhnCisbKI+c5J5+YGpzKzQjc/OaMOdkTGoUmd2MA1ONYjHv5y3xKePT0j3cjlWTw+BiLVazVjvpuVouf0pzq9jpPLBwlQGVJa26nhK2EKYYqjqDvpWkEsv9Q8SixQ9pA42X5SzEHDcm4vZZ8zWzmRQH53iJdkOlnG5/7JZZhLxcguMFXj30AYkI7SaRRdXANYyw5kh2EKKIPlZKRksD6JpE1Xtu1TbOl9sj6wkwU7F1d/4wsMI7Qn6ALMdbraJd3bcDGfwJJt9r2ww83KSSCJPlFSYjAEYxhHMnIvT6cDHDhf/iFPYk2+G3HssBMJB+4O+TDbycaQ9DHDk0uY6TiEktiGRWKiwkpgU253uPDpo5KEpQohoNjmdM6uoUWBAwCR4WtqtX7U9VAoAQliUflcGQLIR6P8pGxTTuWh7VVTl1OsGEidjyJROly6GxUShH7uYlpjzG0FTqwR4WjHZRpKyuXROlE+SrmJLFIfF4tJG19UQscIE0zvXOq9GFQOvFpmIOjwMtzrIQ8TjPTrD0NmefcIIYtZHgLBt+sa+EEoPQBKcgJDThxnVOUotIUM6mrlE5ZakcOUqjusfN2iYVL8p++b4nw== dcutivao@gmail.com
+            EOT
+          [32m+[0m[0m username   = "adminuser"
+        }
+
+      [32m+[0m[0m boot_diagnostics {
+          [32m+[0m[0m storage_account_uri = (known after apply)
+        }
+
+      [32m+[0m[0m os_disk {
+          [32m+[0m[0m caching                   = "ReadWrite"
+          [32m+[0m[0m disk_size_gb              = (known after apply)
+          [32m+[0m[0m id                        = (known after apply)
+          [32m+[0m[0m name                      = "myosdisk-public-0"
+          [32m+[0m[0m storage_account_type      = "Standard_LRS"
+          [32m+[0m[0m write_accelerator_enabled = false
+        }
+
+      [32m+[0m[0m source_image_reference {
+          [32m+[0m[0m offer     = "UbuntuServer"
+          [32m+[0m[0m publisher = "Canonical"
+          [32m+[0m[0m sku       = "16.04-LTS"
+          [32m+[0m[0m version   = "latest"
+        }
+
+      [32m+[0m[0m termination_notification (known after apply)
+    }
+
+[1m  # module.vm.azurerm_network_interface.nic-vm-private[0][0m will be created
+[0m  [32m+[0m[0m resource "azurerm_network_interface" "nic-vm-private" {
+      [32m+[0m[0m accelerated_networking_enabled = false
+      [32m+[0m[0m applied_dns_servers            = (known after apply)
+      [32m+[0m[0m id                             = (known after apply)
+      [32m+[0m[0m internal_domain_name_suffix    = (known after apply)
+      [32m+[0m[0m ip_forwarding_enabled          = false
+      [32m+[0m[0m location                       = "eastus"
+      [32m+[0m[0m mac_address                    = (known after apply)
+      [32m+[0m[0m name                           = "nic-vm-private0"
+      [32m+[0m[0m private_ip_address             = (known after apply)
+      [32m+[0m[0m private_ip_addresses           = (known after apply)
+      [32m+[0m[0m resource_group_name            = "Grupo-de-recursos-Azure-dev"
+      [32m+[0m[0m tags                           = {
+          [32m+[0m[0m "environment" = "entorno-dev"
+        }
+      [32m+[0m[0m virtual_machine_id             = (known after apply)
+
+      [32m+[0m[0m ip_configuration {
+          [32m+[0m[0m gateway_load_balancer_frontend_ip_configuration_id = (known after apply)
+          [32m+[0m[0m name                                               = "ip-vm-0"
+          [32m+[0m[0m primary                                            = (known after apply)
+          [32m+[0m[0m private_ip_address                                 = (known after apply)
+          [32m+[0m[0m private_ip_address_allocation                      = "Dynamic"
+          [32m+[0m[0m private_ip_address_version                         = "IPv4"
+          [32m+[0m[0m subnet_id                                          = (known after apply)
+        }
+    }
+
+[1m  # module.vm.azurerm_network_interface.nic-vm-public[0][0m will be created
+[0m  [32m+[0m[0m resource "azurerm_network_interface" "nic-vm-public" {
+      [32m+[0m[0m accelerated_networking_enabled = false
+      [32m+[0m[0m applied_dns_servers            = (known after apply)
+      [32m+[0m[0m id                             = (known after apply)
+      [32m+[0m[0m internal_domain_name_suffix    = (known after apply)
+      [32m+[0m[0m ip_forwarding_enabled          = false
+      [32m+[0m[0m location                       = "eastus"
+      [32m+[0m[0m mac_address                    = (known after apply)
+      [32m+[0m[0m name                           = "nic-vm-public-0"
+      [32m+[0m[0m private_ip_address             = (known after apply)
+      [32m+[0m[0m private_ip_addresses           = (known after apply)
+      [32m+[0m[0m resource_group_name            = "Grupo-de-recursos-Azure-dev"
+      [32m+[0m[0m tags                           = {
+          [32m+[0m[0m "environment" = "entorno-dev"
+        }
+      [32m+[0m[0m virtual_machine_id             = (known after apply)
+
+      [32m+[0m[0m ip_configuration {
+          [32m+[0m[0m gateway_load_balancer_frontend_ip_configuration_id = (known after apply)
+          [32m+[0m[0m name                                               = "ip-vm-0"
+          [32m+[0m[0m primary                                            = (known after apply)
+          [32m+[0m[0m private_ip_address                                 = (known after apply)
+          [32m+[0m[0m private_ip_address_allocation                      = "Dynamic"
+          [32m+[0m[0m private_ip_address_version                         = "IPv4"
+          [32m+[0m[0m public_ip_address_id                               = (known after apply)
+          [32m+[0m[0m subnet_id                                          = (known after apply)
+        }
+    }
+
+[1m  # module.vnet.azurerm_subnet.db_subnet[0m will be created
+[0m  [32m+[0m[0m resource "azurerm_subnet" "db_subnet" {
+      [32m+[0m[0m address_prefixes                              = [
+          [32m+[0m[0m "10.0.6.0/24",
+        ]
+      [32m+[0m[0m default_outbound_access_enabled               = true
+      [32m+[0m[0m id                                            = (known after apply)
+      [32m+[0m[0m name                                          = "Subnet_DB_dev"
+      [32m+[0m[0m private_endpoint_network_policies             = "Disabled"
+      [32m+[0m[0m private_link_service_network_policies_enabled = true
+      [32m+[0m[0m resource_group_name                           = "Grupo-de-recursos-Azure-dev"
+      [32m+[0m[0m virtual_network_name                          = "VirtualNetwor-dev"
+
+      [32m+[0m[0m delegation {
+          [32m+[0m[0m name = "mysql-delegation"
+
+          [32m+[0m[0m service_delegation {
+              [32m+[0m[0m actions = [
+                  [32m+[0m[0m "Microsoft.Network/virtualNetworks/subnets/join/action",
+                ]
+              [32m+[0m[0m name    = "Microsoft.DBforMySQL/flexibleServers"
+            }
+        }
+    }
+
+[1m  # module.vnet.azurerm_subnet.gateway_subnet[0m will be created
+[0m  [32m+[0m[0m resource "azurerm_subnet" "gateway_subnet" {
+      [32m+[0m[0m address_prefixes                              = [
+          [32m+[0m[0m "10.0.5.0/29",
+        ]
+      [32m+[0m[0m default_outbound_access_enabled               = true
+      [32m+[0m[0m id                                            = (known after apply)
+      [32m+[0m[0m name                                          = "GatewaySubnet"
+      [32m+[0m[0m private_endpoint_network_policies             = "Disabled"
+      [32m+[0m[0m private_link_service_network_policies_enabled = true
+      [32m+[0m[0m resource_group_name                           = "Grupo-de-recursos-Azure-dev"
+      [32m+[0m[0m virtual_network_name                          = "VirtualNetwor-dev"
+    }
+
+[1m  # module.vnet.azurerm_subnet.private[0][0m will be created
+[0m  [32m+[0m[0m resource "azurerm_subnet" "private" {
+      [32m+[0m[0m address_prefixes                              = [
+          [32m+[0m[0m "10.0.7.0/24",
+        ]
+      [32m+[0m[0m default_outbound_access_enabled               = true
+      [32m+[0m[0m id                                            = (known after apply)
+      [32m+[0m[0m name                                          = "private-subnet-1"
+      [32m+[0m[0m private_endpoint_network_policies             = "Disabled"
+      [32m+[0m[0m private_link_service_network_policies_enabled = true
+      [32m+[0m[0m resource_group_name                           = "Grupo-de-recursos-Azure-dev"
+      [32m+[0m[0m virtual_network_name                          = "VirtualNetwor-dev"
+    }
+
+[1m  # module.vnet.azurerm_subnet.public[0][0m will be created
+[0m  [32m+[0m[0m resource "azurerm_subnet" "public" {
+      [32m+[0m[0m address_prefixes                              = [
+          [32m+[0m[0m "10.0.1.0/24",
+        ]
+      [32m+[0m[0m default_outbound_access_enabled               = true
+      [32m+[0m[0m id                                            = (known after apply)
+      [32m+[0m[0m name                                          = "public-subnet-1"
+      [32m+[0m[0m private_endpoint_network_policies             = "Disabled"
+      [32m+[0m[0m private_link_service_network_policies_enabled = true
+      [32m+[0m[0m resource_group_name                           = "Grupo-de-recursos-Azure-dev"
+      [32m+[0m[0m virtual_network_name                          = "VirtualNetwor-dev"
+    }
+
+[1m  # module.vnet.azurerm_subnet.public[1][0m will be created
+[0m  [32m+[0m[0m resource "azurerm_subnet" "public" {
+      [32m+[0m[0m address_prefixes                              = [
+          [32m+[0m[0m "10.0.2.0/24",
+        ]
+      [32m+[0m[0m default_outbound_access_enabled               = true
+      [32m+[0m[0m id                                            = (known after apply)
+      [32m+[0m[0m name                                          = "public-subnet-2"
+      [32m+[0m[0m private_endpoint_network_policies             = "Disabled"
+      [32m+[0m[0m private_link_service_network_policies_enabled = true
+      [32m+[0m[0m resource_group_name                           = "Grupo-de-recursos-Azure-dev"
+      [32m+[0m[0m virtual_network_name                          = "VirtualNetwor-dev"
+    }
+
+[1m  # module.vnet.azurerm_virtual_network.vnet[0m will be created
+[0m  [32m+[0m[0m resource "azurerm_virtual_network" "vnet" {
+      [32m+[0m[0m address_space                  = [
+          [32m+[0m[0m "10.0.0.0/16",
+        ]
+      [32m+[0m[0m dns_servers                    = (known after apply)
+      [32m+[0m[0m guid                           = (known after apply)
+      [32m+[0m[0m id                             = (known after apply)
+      [32m+[0m[0m location                       = "eastus"
+      [32m+[0m[0m name                           = "VirtualNetwor-dev"
+      [32m+[0m[0m private_endpoint_vnet_policies = "Disabled"
+      [32m+[0m[0m resource_group_name            = "Grupo-de-recursos-Azure-dev"
+      [32m+[0m[0m subnet                         = (known after apply)
+      [32m+[0m[0m tags                           = {
+          [32m+[0m[0m "environment" = "entorno-dev"
+        }
+    }
+
+[1m  # module.vpc.aws_internet_gateway.igw[0m will be created
+[0m  [32m+[0m[0m resource "aws_internet_gateway" "igw" {
+      [32m+[0m[0m arn      = (known after apply)
+      [32m+[0m[0m id       = (known after apply)
+      [32m+[0m[0m owner_id = (known after apply)
+      [32m+[0m[0m tags     = {
+          [32m+[0m[0m "Name" = "dev-igw"
+        }
+      [32m+[0m[0m tags_all = {
+          [32m+[0m[0m "Name" = "dev-igw"
+        }
+      [32m+[0m[0m vpc_id   = (known after apply)
+    }
+
+[1m  # module.vpc.aws_route.default_public[0m will be created
+[0m  [32m+[0m[0m resource "aws_route" "default_public" {
+      [32m+[0m[0m destination_cidr_block = "0.0.0.0/0"
+      [32m+[0m[0m gateway_id             = (known after apply)
+      [32m+[0m[0m id                     = (known after apply)
+      [32m+[0m[0m instance_id            = (known after apply)
+      [32m+[0m[0m instance_owner_id      = (known after apply)
+      [32m+[0m[0m network_interface_id   = (known after apply)
+      [32m+[0m[0m origin                 = (known after apply)
+      [32m+[0m[0m route_table_id         = (known after apply)
+      [32m+[0m[0m state                  = (known after apply)
+    }
+
+[1m  # module.vpc.aws_route_table.public[0m will be created
+[0m  [32m+[0m[0m resource "aws_route_table" "public" {
+      [32m+[0m[0m arn              = (known after apply)
+      [32m+[0m[0m id               = (known after apply)
+      [32m+[0m[0m owner_id         = (known after apply)
+      [32m+[0m[0m propagating_vgws = (known after apply)
+      [32m+[0m[0m route            = (known after apply)
+      [32m+[0m[0m tags             = {
+          [32m+[0m[0m "Name" = "dev-public-route-table"
+        }
+      [32m+[0m[0m tags_all         = {
+          [32m+[0m[0m "Name" = "dev-public-route-table"
+        }
+      [32m+[0m[0m vpc_id           = (known after apply)
+    }
+
+[1m  # module.vpc.aws_route_table_association.public[0][0m will be created
+[0m  [32m+[0m[0m resource "aws_route_table_association" "public" {
+      [32m+[0m[0m id             = (known after apply)
+      [32m+[0m[0m route_table_id = (known after apply)
+      [32m+[0m[0m subnet_id      = (known after apply)
+    }
+
+[1m  # module.vpc.aws_route_table_association.public[1][0m will be created
+[0m  [32m+[0m[0m resource "aws_route_table_association" "public" {
+      [32m+[0m[0m id             = (known after apply)
+      [32m+[0m[0m route_table_id = (known after apply)
+      [32m+[0m[0m subnet_id      = (known after apply)
+    }
+
+[1m  # module.vpc.aws_subnet.private[0][0m will be created
+[0m  [32m+[0m[0m resource "aws_subnet" "private" {
+      [32m+[0m[0m arn                                            = (known after apply)
+      [32m+[0m[0m assign_ipv6_address_on_creation                = false
+      [32m+[0m[0m availability_zone                              = "us-east-1a"
+      [32m+[0m[0m availability_zone_id                           = (known after apply)
+      [32m+[0m[0m cidr_block                                     = "172.16.3.0/24"
+      [32m+[0m[0m enable_dns64                                   = false
+      [32m+[0m[0m enable_resource_name_dns_a_record_on_launch    = false
+      [32m+[0m[0m enable_resource_name_dns_aaaa_record_on_launch = false
+      [32m+[0m[0m id                                             = (known after apply)
+      [32m+[0m[0m ipv6_cidr_block_association_id                 = (known after apply)
+      [32m+[0m[0m ipv6_native                                    = false
+      [32m+[0m[0m map_public_ip_on_launch                        = false
+      [32m+[0m[0m owner_id                                       = (known after apply)
+      [32m+[0m[0m private_dns_hostname_type_on_launch            = (known after apply)
+      [32m+[0m[0m tags                                           = {
+          [32m+[0m[0m "Name" = "dev-private-subnet-0"
+        }
+      [32m+[0m[0m tags_all                                       = {
+          [32m+[0m[0m "Name" = "dev-private-subnet-0"
+        }
+      [32m+[0m[0m vpc_id                                         = (known after apply)
+    }
+
+[1m  # module.vpc.aws_subnet.private[1][0m will be created
+[0m  [32m+[0m[0m resource "aws_subnet" "private" {
+      [32m+[0m[0m arn                                            = (known after apply)
+      [32m+[0m[0m assign_ipv6_address_on_creation                = false
+      [32m+[0m[0m availability_zone                              = "us-east-1b"
+      [32m+[0m[0m availability_zone_id                           = (known after apply)
+      [32m+[0m[0m cidr_block                                     = "172.16.4.0/24"
+      [32m+[0m[0m enable_dns64                                   = false
+      [32m+[0m[0m enable_resource_name_dns_a_record_on_launch    = false
+      [32m+[0m[0m enable_resource_name_dns_aaaa_record_on_launch = false
+      [32m+[0m[0m id                                             = (known after apply)
+      [32m+[0m[0m ipv6_cidr_block_association_id                 = (known after apply)
+      [32m+[0m[0m ipv6_native                                    = false
+      [32m+[0m[0m map_public_ip_on_launch                        = false
+      [32m+[0m[0m owner_id                                       = (known after apply)
+      [32m+[0m[0m private_dns_hostname_type_on_launch            = (known after apply)
+      [32m+[0m[0m tags                                           = {
+          [32m+[0m[0m "Name" = "dev-private-subnet-1"
+        }
+      [32m+[0m[0m tags_all                                       = {
+          [32m+[0m[0m "Name" = "dev-private-subnet-1"
+        }
+      [32m+[0m[0m vpc_id                                         = (known after apply)
+    }
+
+[1m  # module.vpc.aws_subnet.public[0][0m will be created
+[0m  [32m+[0m[0m resource "aws_subnet" "public" {
+      [32m+[0m[0m arn                                            = (known after apply)
+      [32m+[0m[0m assign_ipv6_address_on_creation                = false
+      [32m+[0m[0m availability_zone                              = "us-east-1a"
+      [32m+[0m[0m availability_zone_id                           = (known after apply)
+      [32m+[0m[0m cidr_block                                     = "172.16.1.0/24"
+      [32m+[0m[0m enable_dns64                                   = false
+      [32m+[0m[0m enable_resource_name_dns_a_record_on_launch    = false
+      [32m+[0m[0m enable_resource_name_dns_aaaa_record_on_launch = false
+      [32m+[0m[0m id                                             = (known after apply)
+      [32m+[0m[0m ipv6_cidr_block_association_id                 = (known after apply)
+      [32m+[0m[0m ipv6_native                                    = false
+      [32m+[0m[0m map_public_ip_on_launch                        = true
+      [32m+[0m[0m owner_id                                       = (known after apply)
+      [32m+[0m[0m private_dns_hostname_type_on_launch            = (known after apply)
+      [32m+[0m[0m tags                                           = {
+          [32m+[0m[0m "Name" = "dev-public-subnet-0"
+        }
+      [32m+[0m[0m tags_all                                       = {
+          [32m+[0m[0m "Name" = "dev-public-subnet-0"
+        }
+      [32m+[0m[0m vpc_id                                         = (known after apply)
+    }
+
+[1m  # module.vpc.aws_subnet.public[1][0m will be created
+[0m  [32m+[0m[0m resource "aws_subnet" "public" {
+      [32m+[0m[0m arn                                            = (known after apply)
+      [32m+[0m[0m assign_ipv6_address_on_creation                = false
+      [32m+[0m[0m availability_zone                              = "us-east-1b"
+      [32m+[0m[0m availability_zone_id                           = (known after apply)
+      [32m+[0m[0m cidr_block                                     = "172.16.2.0/24"
+      [32m+[0m[0m enable_dns64                                   = false
+      [32m+[0m[0m enable_resource_name_dns_a_record_on_launch    = false
+      [32m+[0m[0m enable_resource_name_dns_aaaa_record_on_launch = false
+      [32m+[0m[0m id                                             = (known after apply)
+      [32m+[0m[0m ipv6_cidr_block_association_id                 = (known after apply)
+      [32m+[0m[0m ipv6_native                                    = false
+      [32m+[0m[0m map_public_ip_on_launch                        = true
+      [32m+[0m[0m owner_id                                       = (known after apply)
+      [32m+[0m[0m private_dns_hostname_type_on_launch            = (known after apply)
+      [32m+[0m[0m tags                                           = {
+          [32m+[0m[0m "Name" = "dev-public-subnet-1"
+        }
+      [32m+[0m[0m tags_all                                       = {
+          [32m+[0m[0m "Name" = "dev-public-subnet-1"
+        }
+      [32m+[0m[0m vpc_id                                         = (known after apply)
+    }
+
+[1m  # module.vpc.aws_vpc.this[0m will be created
+[0m  [32m+[0m[0m resource "aws_vpc" "this" {
+      [32m+[0m[0m arn                                  = (known after apply)
+      [32m+[0m[0m cidr_block                           = "172.16.0.0/16"
+      [32m+[0m[0m default_network_acl_id               = (known after apply)
+      [32m+[0m[0m default_route_table_id               = (known after apply)
+      [32m+[0m[0m default_security_group_id            = (known after apply)
+      [32m+[0m[0m dhcp_options_id                      = (known after apply)
+      [32m+[0m[0m enable_dns_hostnames                 = true
+      [32m+[0m[0m enable_dns_support                   = true
+      [32m+[0m[0m enable_network_address_usage_metrics = (known after apply)
+      [32m+[0m[0m id                                   = (known after apply)
+      [32m+[0m[0m instance_tenancy                     = "default"
+      [32m+[0m[0m ipv6_association_id                  = (known after apply)
+      [32m+[0m[0m ipv6_cidr_block                      = (known after apply)
+      [32m+[0m[0m ipv6_cidr_block_network_border_group = (known after apply)
+      [32m+[0m[0m main_route_table_id                  = (known after apply)
+      [32m+[0m[0m owner_id                             = (known after apply)
+      [32m+[0m[0m tags                                 = {
+          [32m+[0m[0m "Name" = "dev-vpc"
+        }
+      [32m+[0m[0m tags_all                             = {
+          [32m+[0m[0m "Name" = "dev-vpc"
+        }
+    }
+
+[1m  # module.vpn-aws.aws_customer_gateway.aws_cgw[0m will be created
+[0m  [32m+[0m[0m resource "aws_customer_gateway" "aws_cgw" {
+      [32m+[0m[0m arn        = (known after apply)
+      [32m+[0m[0m bgp_asn    = "65000"
+      [32m+[0m[0m id         = (known after apply)
+      [32m+[0m[0m ip_address = (known after apply)
+      [32m+[0m[0m tags_all   = (known after apply)
+      [32m+[0m[0m type       = "ipsec.1"
+    }
+
+[1m  # module.vpn-aws.aws_vpn_connection.aws_vpn[0m will be created
+[0m  [32m+[0m[0m resource "aws_vpn_connection" "aws_vpn" {
+      [32m+[0m[0m arn                            = (known after apply)
+      [32m+[0m[0m core_network_arn               = (known after apply)
+      [32m+[0m[0m core_network_attachment_arn    = (known after apply)
+      [32m+[0m[0m customer_gateway_configuration = (sensitive value)
+      [32m+[0m[0m customer_gateway_id            = (known after apply)
+      [32m+[0m[0m enable_acceleration            = (known after apply)
+      [32m+[0m[0m id                             = (known after apply)
+      [32m+[0m[0m local_ipv4_network_cidr        = (known after apply)
+      [32m+[0m[0m local_ipv6_network_cidr        = (known after apply)
+      [32m+[0m[0m outside_ip_address_type        = (known after apply)
+      [32m+[0m[0m remote_ipv4_network_cidr       = (known after apply)
+      [32m+[0m[0m remote_ipv6_network_cidr       = (known after apply)
+      [32m+[0m[0m routes                         = (known after apply)
+      [32m+[0m[0m static_routes_only             = true
+      [32m+[0m[0m tags_all                       = (known after apply)
+      [32m+[0m[0m transit_gateway_attachment_id  = (known after apply)
+      [32m+[0m[0m tunnel1_address                = (known after apply)
+      [32m+[0m[0m tunnel1_bgp_asn                = (known after apply)
+      [32m+[0m[0m tunnel1_bgp_holdtime           = (known after apply)
+      [32m+[0m[0m tunnel1_cgw_inside_address     = (known after apply)
+      [32m+[0m[0m tunnel1_inside_cidr            = "169.254.21.0/30"
+      [32m+[0m[0m tunnel1_inside_ipv6_cidr       = (known after apply)
+      [32m+[0m[0m tunnel1_preshared_key          = (sensitive value)
+      [32m+[0m[0m tunnel1_vgw_inside_address     = (known after apply)
+      [32m+[0m[0m tunnel2_address                = (known after apply)
+      [32m+[0m[0m tunnel2_bgp_asn                = (known after apply)
+      [32m+[0m[0m tunnel2_bgp_holdtime           = (known after apply)
+      [32m+[0m[0m tunnel2_cgw_inside_address     = (known after apply)
+      [32m+[0m[0m tunnel2_inside_cidr            = (known after apply)
+      [32m+[0m[0m tunnel2_inside_ipv6_cidr       = (known after apply)
+      [32m+[0m[0m tunnel2_preshared_key          = (sensitive value)
+      [32m+[0m[0m tunnel2_vgw_inside_address     = (known after apply)
+      [32m+[0m[0m tunnel_inside_ip_version       = (known after apply)
+      [32m+[0m[0m type                           = "ipsec.1"
+      [32m+[0m[0m vgw_telemetry                  = (known after apply)
+      [32m+[0m[0m vpn_gateway_id                 = (known after apply)
+
+      [32m+[0m[0m tunnel1_log_options (known after apply)
+
+      [32m+[0m[0m tunnel2_log_options (known after apply)
+    }
+
+[1m  # module.vpn-aws.aws_vpn_connection_route.azure_route[0m will be created
+[0m  [32m+[0m[0m resource "aws_vpn_connection_route" "azure_route" {
+      [32m+[0m[0m destination_cidr_block = "10.0.4.0/24"
+      [32m+[0m[0m id                     = (known after apply)
+      [32m+[0m[0m vpn_connection_id      = (known after apply)
+    }
+
+[1m  # module.vpn-aws.aws_vpn_gateway.aws_vpn_gw[0m will be created
+[0m  [32m+[0m[0m resource "aws_vpn_gateway" "aws_vpn_gw" {
+      [32m+[0m[0m amazon_side_asn = (known after apply)
+      [32m+[0m[0m arn             = (known after apply)
+      [32m+[0m[0m id              = (known after apply)
+      [32m+[0m[0m tags_all        = (known after apply)
+      [32m+[0m[0m vpc_id          = (known after apply)
+    }
+
+[1m  # module.vpn-azure.azurerm_local_network_gateway.azure_local_gw[0m will be created
+[0m  [32m+[0m[0m resource "azurerm_local_network_gateway" "azure_local_gw" {
+      [32m+[0m[0m address_space       = [
+          [32m+[0m[0m "172.16.3.0/24",
+        ]
+      [32m+[0m[0m gateway_address     = (known after apply)
+      [32m+[0m[0m id                  = (known after apply)
+      [32m+[0m[0m location            = "eastus"
+      [32m+[0m[0m name                = "azure-local-gw-dev"
+      [32m+[0m[0m resource_group_name = "Grupo-de-recursos-Azure-dev"
+    }
+
+[1m  # module.vpn-azure.azurerm_virtual_network_gateway.azure_vpn_gw[0m will be created
+[0m  [32m+[0m[0m resource "azurerm_virtual_network_gateway" "azure_vpn_gw" {
+      [32m+[0m[0m active_active                         = false
+      [32m+[0m[0m bgp_route_translation_for_nat_enabled = false
+      [32m+[0m[0m enable_bgp                            = false
+      [32m+[0m[0m generation                            = (known after apply)
+      [32m+[0m[0m id                                    = (known after apply)
+      [32m+[0m[0m ip_sec_replay_protection_enabled      = true
+      [32m+[0m[0m location                              = "eastus"
+      [32m+[0m[0m name                                  = "azure-vpn-gw-dev"
+      [32m+[0m[0m remote_vnet_traffic_enabled           = false
+      [32m+[0m[0m resource_group_name                   = "Grupo-de-recursos-Azure-dev"
+      [32m+[0m[0m sku                                   = "Basic"
+      [32m+[0m[0m type                                  = "Vpn"
+      [32m+[0m[0m virtual_wan_traffic_enabled           = false
+      [32m+[0m[0m vpn_type                              = "RouteBased"
+
+      [32m+[0m[0m bgp_settings (known after apply)
+
+      [32m+[0m[0m ip_configuration {
+          [32m+[0m[0m name                          = "vnetGatewayConfig-dev"
+          [32m+[0m[0m private_ip_address_allocation = "Dynamic"
+          [32m+[0m[0m public_ip_address_id          = (known after apply)
+          [32m+[0m[0m subnet_id                     = (known after apply)
+        }
+    }
+
+[1m  # module.vpn-azure.azurerm_virtual_network_gateway_connection.azure_vpn[0m will be created
+[0m  [32m+[0m[0m resource "azurerm_virtual_network_gateway_connection" "azure_vpn" {
+      [32m+[0m[0m connection_mode                    = "Default"
+      [32m+[0m[0m connection_protocol                = (known after apply)
+      [32m+[0m[0m enable_bgp                         = (known after apply)
+      [32m+[0m[0m express_route_gateway_bypass       = (known after apply)
+      [32m+[0m[0m id                                 = (known after apply)
+      [32m+[0m[0m local_network_gateway_id           = (known after apply)
+      [32m+[0m[0m location                           = "eastus"
+      [32m+[0m[0m name                               = "azure-vpn-connection-dev"
+      [32m+[0m[0m private_link_fast_path_enabled     = false
+      [32m+[0m[0m resource_group_name                = "Grupo-de-recursos-Azure-dev"
+      [32m+[0m[0m routing_weight                     = (known after apply)
+      [32m+[0m[0m shared_key                         = (sensitive value)
+      [32m+[0m[0m type                               = "IPsec"
+      [32m+[0m[0m use_policy_based_traffic_selectors = (known after apply)
+      [32m+[0m[0m virtual_network_gateway_id         = (known after apply)
+    }
+
+[1mPlan:[0m 58 to add, 0 to change, 0 to destroy.
+[0m
+Changes to Outputs:
+  [32m+[0m[0m ip_vpn         = (known after apply)
+  [32m+[0m[0m salida_privada = [
+      [32m+[0m[0m (known after apply),
+    ]
+  [32m+[0m[0m salida_publica = [
+      [32m+[0m[0m (known after apply),
+      [32m+[0m[0m (known after apply),
+    ]
+[90m
+─────────────────────────────────────────────────────────────────────────────[0m
+
+Note: You didn't use the -out option to save this plan, so Terraform can't
+guarantee to take exactly these actions if you run "terraform apply" now.

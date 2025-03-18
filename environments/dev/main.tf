@@ -85,14 +85,14 @@ module "ec2" {
       iam_instance_profile = module.iam.iam_instance_profiles["EC2Role"]
       key_name             = module.keys.aws_key_pair #aws_key_pair.generated.key_name
     }
-    /* "db-server" = {
+    "db-server" = {
       instance_type        = "t2.micro"
       subnet_id            = module.vpc.private_subnets[0] # esto es la salida del ouput de la variable private_subnets del modulo ec2
       os                   = "ubuntu"
       security_groups      = [module.security_groups.security_group_ids["rds-sg"], module.security_groups.security_group_ids["ec2-sg"]]
       iam_instance_profile = module.iam.iam_instance_profiles["EC2Role"]
-      key_name             = module.keys.aws_key_pair.key_name
-    } */
+      key_name             = module.keys.aws_key_pair
+    }
   }
 }
 
@@ -179,9 +179,10 @@ module "nsg" {
   environment          = var.environment
   owner                = var.owner
   subnet_id_private    = module.vnet.private_subnet_ids
-  vm_network_interface = module.vm.vm_network_interface
+  subnet_id_db         = module.vnet.db_subnet
+  vm_network_interface = module.vm.vm_network_interface_public
   network_security_groups = {
-    "nsg-vm" = {
+    "nsg-vm-public" = {
       location            = var.location
       resource_group_name = module.resource_group.name_resource_group
       security_rules = [
@@ -206,17 +207,6 @@ module "nsg" {
           destination_port_range     = "80"
           source_address_prefix      = "*"
           destination_address_prefix = "*"
-        },
-        {
-          name                       = "AlloICMP"
-          priority                   = 101
-          direction                  = "Inbound"
-          access                     = "Allow"
-          protocol                   = "Icmp"
-          source_port_range          = "*"
-          destination_port_range     = "*"
-          source_address_prefix      = "*"
-          destination_address_prefix = "*"
         }
       ]
     },
@@ -236,14 +226,43 @@ module "nsg" {
           destination_address_prefix = "*"
         }
       ]
+    },
+    "nsg-vm-private" = {
+      location            = var.location
+      resource_group_name = module.resource_group.name_resource_group
+      security_rules = [
+        {
+          name                       = "AllowSSH"
+          priority                   = 100
+          direction                  = "Inbound"
+          access                     = "Allow"
+          protocol                   = "Tcp"
+          source_port_range          = "*"
+          destination_port_range     = "22"
+          source_address_prefix      = "*"
+          destination_address_prefix = "*"
+        },
+        {
+          name                       = "AlloICMP"
+          priority                   = 101
+          direction                  = "Inbound"
+          access                     = "Allow"
+          protocol                   = "Icmp"
+          source_port_range          = "*"
+          destination_port_range     = "*"
+          source_address_prefix      = "*"
+          destination_address_prefix = "*"
+        }
+      ]
     }
+    
   }
 }
 
 module "ip_publis" {
   source              = "../../modules/azure/ip-publics"
   resource_group_name = module.resource_group.name_resource_group
-  vmcount             = var.vmcount
+  vmcount             = var.vm_public_count
   location            = var.location
   environment         = var.environment
   owner               = var.owner
@@ -251,7 +270,8 @@ module "ip_publis" {
 
 module "vm" {
   source                                  = "../../modules/azure/vm"
-  vmcount                                 = var.vmcount
+  vm_private_count                        = var.vm_private_count
+  vm_public_count                        = var.vm_public_count
   location                                = var.location
   resource_group_name                     = module.resource_group.name_resource_group
   environment                             = var.environment
@@ -274,7 +294,7 @@ module "vm" {
   owner                  = var.owner
   administrator_login    = var.administrator_login
   administrator_password = var.administrator_password
-  subnet_id_private      = module.vnet.private_subnet_ids
+  delegated_subnet_id    = module.vnet.db_subnet
 } */
 
 module "vpn-azure" {
@@ -284,15 +304,15 @@ module "vpn-azure" {
   environment          = var.environment
   resource_group_name  = module.resource_group.name_resource_group
   gateway_address      = module.vpn-aws.aws_vpn_connection_address
-  address_space        = var.public_subnet_cidrs
-  subnet_id            = module.vnet.public_subnet_daco
+  address_space        = var.private_subnet_cidrs
+  subnet_id            = module.vnet.gateway_subnet
   shared_key           = module.vpn-aws.aws_vpn_connection_key
   public_ip_address_id = module.ip_publis.id_vpn
 }
 
-module "azure_route_table" {
+/* module "azure_route_table" {
   source = "../../modules/azure/route_table"
   location            = var.location
   resource_group_name = module.resource_group.name_resource_group
   public_subnet_ids   = module.vnet.public_subnet_ids
-}
+} */
