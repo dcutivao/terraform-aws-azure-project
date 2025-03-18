@@ -126,15 +126,6 @@ module "vpn-aws" {
   owner             = var.owner
 }
 
-/* module "aws_route_table" {
-  source      = "../../modules/aws/route_table"
-  gateway_id  = module.vpn-aws.gateway_id
-  vpc_id      = module.vpc.vpc_id
-  environment = var.environment
-  owner       = var.owner
-  subnet_id   = module.vpc.public_subnets
-} */
-
 #-----------------------------------Infraestrucutura Azure--------------------------------------------------------
 
 module "resource_group" {
@@ -309,10 +300,3 @@ module "vpn-azure" {
   shared_key           = module.vpn-aws.aws_vpn_connection_key
   public_ip_address_id = module.ip_publis.id_vpn
 }
-
-/* module "azure_route_table" {
-  source = "../../modules/azure/route_table"
-  location            = var.location
-  resource_group_name = module.resource_group.name_resource_group
-  public_subnet_ids   = module.vnet.public_subnet_ids
-} */
