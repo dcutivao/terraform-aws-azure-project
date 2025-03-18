@@ -81,7 +81,7 @@
 * Terraform intenta crear recursos en paralelo cuando es posible. Asegúrate de que no haya dependencias innecesarias entre recursos para maximizar la paralelización.
 * Para ejecutar Terraform en paralelo, ejecuta el comando `terraform apply -parallelism=20` (o cualquier otro número de paralelización que desees). Esto le dice a Terraform que ejecute 20 operaciones de creación de recursos al mismo tiempo.
 
-        * terraform apply -parallelism=20
+        terraform apply -parallelism=20
 
 🎯 Beneficios de -parallelism=n
 - ✅ Mejora la velocidad de despliegue: Al ejecutar varias operaciones en paralelo, los tiempos de despliegue se reducen significativamente.
