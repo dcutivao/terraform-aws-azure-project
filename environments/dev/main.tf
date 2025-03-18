@@ -262,7 +262,7 @@ module "ip_publis" {
 module "vm" {
   source                                  = "../../modules/azure/vm"
   vm_private_count                        = var.vm_private_count
-  vm_public_count                        = var.vm_public_count
+  vm_public_count                         = var.vm_public_count
   location                                = var.location
   resource_group_name                     = module.resource_group.name_resource_group
   environment                             = var.environment
