@@ -11,7 +11,7 @@
 .terraform/
 
 # Archivos de credenciales y configuración local
-#*.tfvars
+*.tfvars
 *.auto.tfvars
 
 # Archivos de logs o salida temporal
